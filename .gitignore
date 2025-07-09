@@ -1,0 +1,3 @@
+*.stp
+*.db
+**/__pycache__
