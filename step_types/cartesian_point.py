@@ -1,4 +1,4 @@
-from parsers.helpers import get_arguments
+from step_types.helpers import get_arguments
 
 class CartesianPoint():
     def __init__(self, conn, key: int):

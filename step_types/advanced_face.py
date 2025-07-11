@@ -1,6 +1,6 @@
-from parsers.helpers import get_arguments, clean_display, clean_display_list
-from parsers.face_bound import FaceBound
-from parsers.abstract_parsers.surface import parse_surface
+from step_types.helpers import get_arguments, clean_display, clean_display_list
+from step_types.face_bound import FaceBound
+from step_types.abstract_types.surface import parse_surface
 
 class AdvancedFace():
     def __init__(self, conn, key: int):

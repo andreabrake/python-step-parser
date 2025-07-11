@@ -1,6 +1,6 @@
-from parsers.helpers import get_arguments, clean_display
-from parsers.cartesian_point import CartesianPoint
-from parsers.vector import Vector
+from step_types.helpers import get_arguments, clean_display
+from step_types.cartesian_point import CartesianPoint
+from step_types.vector import Vector
 
 class Line():
     def __init__(self, conn, key: int):

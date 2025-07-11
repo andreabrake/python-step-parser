@@ -1,5 +1,5 @@
-from parsers.helpers import get_arguments, clean_display_list
-from parsers.advanced_face import AdvancedFace
+from step_types.helpers import get_arguments, clean_display_list
+from step_types.advanced_face import AdvancedFace
 
 class ClosedShell():
     def __init__(self, conn, key: int):

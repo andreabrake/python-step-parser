@@ -1,5 +1,5 @@
-from parsers.helpers import get_arguments, clean_display
-from parsers.edge_loop import EdgeLoop
+from step_types.helpers import get_arguments, clean_display
+from step_types.edge_loop import EdgeLoop
 
 class FaceBound():
     def __init__(self, conn, key: int):

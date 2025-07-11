@@ -1,5 +1,5 @@
-from parsers.helpers import get_arguments
-from parsers.fill_area_style_colour import FillAreaStyleColour
+from step_types.helpers import get_arguments
+from step_types.fill_area_style_colour import FillAreaStyleColour
 
 class FillAreaStyle():
     def __init__(self, conn, key: int):

@@ -1,5 +1,5 @@
-from parsers.helpers import get_arguments, clean_display_list
-from parsers.surface_style_usage import SurfaceStyleUsage
+from step_types.helpers import get_arguments, clean_display_list
+from step_types.surface_style_usage import SurfaceStyleUsage
 
 class PresentationStyleAssignment():
     def __init__(self, conn, key: int):

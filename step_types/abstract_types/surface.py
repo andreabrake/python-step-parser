@@ -1,11 +1,11 @@
-from parsers.helpers import get_entity_type
+from step_types.helpers import get_entity_type
 
-from parsers.conical_surface import ConicalSurface
-from parsers.cylindrical_surface import CylindricalSurface
-from parsers.degenerate_toroidal_surface import DegenerateToroidalSurface
-from parsers.plane import Plane
-from parsers.spherical_surface import SphericalSurface
-from parsers.toroidal_surface import ToroidalSurface
+from step_types.conical_surface import ConicalSurface
+from step_types.cylindrical_surface import CylindricalSurface
+from step_types.degenerate_toroidal_surface import DegenerateToroidalSurface
+from step_types.plane import Plane
+from step_types.spherical_surface import SphericalSurface
+from step_types.toroidal_surface import ToroidalSurface
 
 def parse_surface(conn, id: int):
     type = get_entity_type(conn, id)

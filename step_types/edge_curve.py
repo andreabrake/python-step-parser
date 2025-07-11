@@ -1,6 +1,6 @@
-from parsers.helpers import  get_arguments, clean_display
-from parsers.vertex_point import VertexPoint
-from parsers.abstract_parsers.curve import parse_curve
+from step_types.helpers import  get_arguments, clean_display
+from step_types.vertex_point import VertexPoint
+from step_types.abstract_types.curve import parse_curve
 
 class EdgeCurve():
     def __init__(self, conn, key: int):

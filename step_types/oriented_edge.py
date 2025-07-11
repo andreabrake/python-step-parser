@@ -1,5 +1,5 @@
-from parsers.helpers import get_arguments, clean_display
-from parsers.edge_curve import EdgeCurve
+from step_types.helpers import get_arguments, clean_display
+from step_types.edge_curve import EdgeCurve
 
 class OrientedEdge():
     def __init__(self, conn, key: int):

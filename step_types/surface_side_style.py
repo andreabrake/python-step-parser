@@ -1,5 +1,5 @@
-from parsers.helpers import get_arguments, clean_display_list
-from parsers.surface_style_fill_area import SurfaceStyleFillArea
+from step_types.helpers import get_arguments, clean_display_list
+from step_types.surface_style_fill_area import SurfaceStyleFillArea
 
 class SurfaceSideStyle():
     def __init__(self, conn, key: int):

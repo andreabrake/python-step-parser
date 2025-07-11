@@ -1,5 +1,5 @@
-from parsers.helpers import get_arguments, clean_display
-from parsers.closed_shell import ClosedShell
+from step_types.helpers import get_arguments, clean_display
+from step_types.closed_shell import ClosedShell
 
 class ManifoldSolidBrep():
     def __init__(self, conn, key: int):

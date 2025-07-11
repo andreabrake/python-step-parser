@@ -1,5 +1,5 @@
-from parsers.helpers import get_arguments, clean_display_list
-from parsers.styled_item import StyledItem
+from step_types.helpers import get_arguments, clean_display_list
+from step_types.styled_item import StyledItem
 
 class MechanicalDesignGeometricPresentationRepresentation():
     def __init__(self, conn, key: int):

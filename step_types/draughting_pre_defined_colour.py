@@ -1,5 +1,5 @@
-from parsers.helpers import get_arguments
-from parsers.colour_rgb import ColourRGB
+from step_types.helpers import get_arguments
+from step_types.colour_rgb import ColourRGB
 
 class DraughtingPreDefinedColour():
     def __init__(self, conn, key: int):

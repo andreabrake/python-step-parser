@@ -1,9 +1,9 @@
-from parsers.helpers import get_entity_type
+from step_types.helpers import get_entity_type
 
-from parsers.line import Line
-from parsers.circle import Circle
-from parsers.ellipse import Ellipse
-from parsers.b_spline_curve_with_knots import BSplineCurveWithKnots
+from step_types.line import Line
+from step_types.circle import Circle
+from step_types.ellipse import Ellipse
+from step_types.b_spline_curve_with_knots import BSplineCurveWithKnots
 
 def parse_curve(conn, id: int):
     type = get_entity_type(conn, id)

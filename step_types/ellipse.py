@@ -1,5 +1,5 @@
-from parsers.helpers import get_arguments, clean_display
-from parsers.axis2_placement3d import Axis2Placement3d
+from step_types.helpers import get_arguments, clean_display
+from step_types.axis2_placement3d import Axis2Placement3d
 
 class Ellipse():
     def __init__(self, conn, key: int):

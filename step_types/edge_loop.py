@@ -1,5 +1,5 @@
-from parsers.helpers import get_arguments, clean_display_list
-from parsers.oriented_edge import OrientedEdge
+from step_types.helpers import get_arguments, clean_display_list
+from step_types.oriented_edge import OrientedEdge
 
 class EdgeLoop():
     def __init__(self, conn, key: int):

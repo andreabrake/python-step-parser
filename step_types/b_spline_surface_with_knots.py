@@ -1,5 +1,5 @@
-from parsers.helpers import get_arguments, clean_display_doublelist
-from parsers.cartesian_point import CartesianPoint
+from step_types.helpers import get_arguments, clean_display_doublelist
+from step_types.cartesian_point import CartesianPoint
 
 class BSplineSurfaceWithKnots():
     def __init__(self, conn, key: int):

@@ -1,5 +1,5 @@
-from parsers.helpers import get_arguments, clean_display
-from parsers.direction import Direction
+from step_types.helpers import get_arguments, clean_display
+from step_types.direction import Direction
 
 class Vector():
     def __init__(self, conn, key: int):

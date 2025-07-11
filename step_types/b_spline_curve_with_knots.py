@@ -1,6 +1,6 @@
-from parsers.helpers import get_arguments, clean_display, clean_display_list
-from parsers.cartesian_point import CartesianPoint
-from parsers.vertex_point import VertexPoint
+from step_types.helpers import get_arguments, clean_display, clean_display_list
+from step_types.cartesian_point import CartesianPoint
+from step_types.vertex_point import VertexPoint
 
 class BSplineCurveWithKnots():
     def __init__(self, conn, key: int):
