@@ -1,5 +1,5 @@
 from step_types.helpers import get_arguments, clean_display, clean_display_list
-from step_types.abstract_types.item import parse_colour
+from step_types.abstract_types import color
 from step_types.surfacer_style_transparent import SurfaceStyleTransparent
 
 class SurfaceStyleRenderingWithProperties():
@@ -20,5 +20,5 @@ class SurfaceStyleRenderingWithProperties():
     def __get_arguments(self, conn):
         args = get_arguments(conn, self.key)
         self.method = args[0]
-        self.colour = parse_colour(conn, args[1])
+        self.colour = color.parse(conn, args[1])
         self.transparency = [SurfaceStyleTransparent(conn, arg) for arg in args[2]]

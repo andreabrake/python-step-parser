@@ -1,7 +1,7 @@
 from step_types.helpers import get_arguments, clean_display
 from step_types.vertex_point import VertexPoint
 
-class VertexPoint():
+class VertexLoop():
     def __init__(self, conn, key: int):
         self.key = key
         self.__get_arguments(conn)

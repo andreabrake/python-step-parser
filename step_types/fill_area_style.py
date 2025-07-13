@@ -1,4 +1,4 @@
-from step_types.helpers import get_arguments
+from step_types.helpers import get_arguments, clean_display_list
 from step_types.fill_area_style_colour import FillAreaStyleColour
 
 class FillAreaStyle():
@@ -11,7 +11,7 @@ class FillAreaStyle():
         return f'''FILL_AREA_STYLE (
     key          = {self.key}
     name         = {self.name}
-    fill_styles  = {self.fill_styles}
+    fill_styles  = {clean_display_list(self.fill_styles)}
 )
 '''
     

@@ -1,5 +1,6 @@
-from step_types.helpers import get_complex_or_base_arguments, clean_display_list
+from step_types.helpers import get_complex_or_base_arguments, clean_display, clean_display_list
 from step_types.cartesian_point import CartesianPoint
+from step_types.vertex_point import VertexPoint
 
 class BSplineCurveWithKnots():
     def __init__(self, conn, key: int):
@@ -8,7 +9,7 @@ class BSplineCurveWithKnots():
         pass
 
     def __str__(self):
-        return f'''B_SPLINE_CURVE_WITH_KNOTS (
+        return f'''RATIONAL_B_SPLINE_CURVE_WITH_KNOTS (
     key          = {self.key}
     name         = {self.name}
     degree       = {self.degree}
@@ -19,6 +20,7 @@ class BSplineCurveWithKnots():
     knot_mult    = {self.knot_multiplicities}
     knots        = {self.knots}
     knot_spec    = {self.knot_spec}
+    weights      = {self.weights}
 )
 '''
     
@@ -30,7 +32,8 @@ class BSplineCurveWithKnots():
                                               'CURVE',
                                               'BOUNDED_CURVE',
                                               'B_SPLINE_CURVE',
-                                              'B_SPLINE_CURVE_WITH_KNOTS'])
+                                              'B_SPLINE_CURVE_WITH_KNOTS',
+                                              'RATIONAL_B_SPLINE_CURVE'])
         
         self.name = args[0]
         self.degree = args[1]
@@ -41,3 +44,4 @@ class BSplineCurveWithKnots():
         self.knot_multiplicities = args[6]
         self.knots = args[7]
         self.knot_spec = args[8]
+        self.weights = args[9]

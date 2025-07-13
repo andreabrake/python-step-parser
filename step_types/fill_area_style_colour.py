@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments
-from step_types.abstract_types.parse_colour import parse_colour
+from step_types.helpers import get_arguments, clean_display
+from step_types.abstract_types import color
 
 class FillAreaStyleColour():
     def __init__(self, conn, key: int):
@@ -11,12 +11,11 @@ class FillAreaStyleColour():
         return f'''FILL_AREA_STYLE_COLOUR (
     key          = {self.key}
     name         = {self.name}
-    colour       = {self.colour}
+    colour       = {clean_display(self.colour)}
 )
 '''
     
     def __get_arguments(self, conn):
-        print('fill area key', self.key)
         args = get_arguments(conn, self.key)
         self.name = args[0]
-        self.colour = parse_colour(conn, args[1])
+        self.colour = color.parse(conn, args[1])

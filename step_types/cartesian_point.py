@@ -15,7 +15,6 @@ class CartesianPoint():
 '''
     
     def __get_arguments(self, conn):
-        print(f'getting cartesian point {self.key}')
         args = get_arguments(conn, self.key)
         self.name = args[0]
         self.coordinates = args[1]

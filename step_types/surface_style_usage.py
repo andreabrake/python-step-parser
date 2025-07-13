@@ -1,4 +1,4 @@
-from step_types.helpers import get_arguments, clean_display_list
+from step_types.helpers import get_arguments, clean_display
 from step_types.surface_side_style import SurfaceSideStyle
 
 class SurfaceStyleUsage():
@@ -10,8 +10,8 @@ class SurfaceStyleUsage():
     def __str__(self):
         return f'''SURFACE_STYLE_USAGE (
     key          = {self.key}
-    name         = {self.name}
-    style        = {clean_display_list(self.style)}
+    side         = {self.side}
+    style        = {clean_display(self.style)}
 )
 '''
     

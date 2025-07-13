@@ -1,5 +1,5 @@
 from step_types.helpers import get_arguments, clean_display
-from step_types.edge_loop import EdgeLoop
+from step_types.abstract_types import loop
 
 class FaceBound():
     def __init__(self, conn, key: int):
@@ -19,5 +19,5 @@ class FaceBound():
     def __get_arguments(self, conn):
         args = get_arguments(conn, self.key)
         self.name = args[0]
-        self.bound = EdgeLoop(conn, args[1])
+        self.bound = loop.parse(conn, args[1])
         self.orientation = args[2]
