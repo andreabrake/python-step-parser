@@ -3,8 +3,9 @@ from .helpers import get_arguments, clean_display, clean_display_list
 class Transient():
     type_name: str = 'TRANSIENT'
 
-    def __init__(self, conn, key: int):
+    def __init__(self, conn, key: int, resolve_children: bool = True):
         self.key = key
+        self.resolve_children = resolve_children
 
     def __str__(self):
         return f'''{self.type_name} (

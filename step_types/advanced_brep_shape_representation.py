@@ -5,8 +5,8 @@ from .shape_representation import ShapeRepresentation
 class AdvancedBrepShapeRepresentation(ShapeRepresentation):
     type_name = 'ADVANCED_BREP_SHAPE_REPRESENTATION'
 
-    def __init__(self, conn, key: int):
-        super().__init__(conn, key)
+    def __init__(self, conn, key: int, resolve_children: bool = True):
+        super().__init__(conn, key, resolve_children)
         self.__get_arguments(conn)
 
     def __str__(self):

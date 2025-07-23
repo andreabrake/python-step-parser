@@ -207,8 +207,6 @@ def load_all_cache(conn: sqlite3.Connection) -> None:
         arg_cache[entity_id].append(parse_arg_value_with_traversal(None, row[1], row[2].strip(), row[3].strip() if row[3] is not None else None))
         i+=1
 
-    print('300831', entity_type_cache[300831], arg_cache[300831])
-
     print(f'[*] Loaded {i} step_arguments into memory cache')
 
     cursor.close()
