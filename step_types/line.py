@@ -1,24 +1,34 @@
 from step_types.helpers import get_arguments, clean_display
 from step_types.cartesian_point import CartesianPoint
 from step_types.vector import Vector
+from step_types.curve import Curve
 
-class Line():
+class Line(Curve):
+    type_name = 'LINE'
+
     def __init__(self, conn, key: int):
-        self.key = key
+        super().__init__(conn, key)
         self.__get_arguments(conn)
-        pass
 
     def __str__(self):
-        return f'''LINE (
-    key          = {self.key}
-    name         = {self.name}
-    point        = {clean_display(self.point)}
-    direction    = {clean_display(self.direction)}
+        return f'''{self.type_name} (
+{self._str_args()}
 )
 '''
-    
+
+    def _str_args(self):
+        return f'''{super()._str_args()}
+    point        = {clean_display(self.point)}
+    direction    = {clean_display(self.direction)}'''
+
     def __get_arguments(self, conn):
         args = get_arguments(conn, self.key)
-        self.name = args[0]
         self.point = CartesianPoint(conn, args[1])
         self.direction = Vector(conn, args[2])
+        
+    def get_geometry(self):
+        return super().get_geometry() | {
+            'type': self.type_name,
+            'point': self.point.get_geometry(),
+            'dir': self.direction.get_geometry(),
+        }

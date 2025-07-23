@@ -1,25 +1,26 @@
 from step_types.helpers import get_arguments, clean_display, clean_display_list
 from step_types.transient import Transient
 from step_types.product_definition_shape import ProductDefinitionShape
+from step_types.shape_representation_relationship import ShapeRepresentationRelationship
 
-class AssemblyComponentUsage(Transient):
+class ContextDependentShapeRepresentation(Transient):
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
         self.__get_arguments(conn)
 
     def __str__(self):
-        return f'''ASSEMBLY_COMPONENT_USAGE (
+        return f'''CONTEXT_DEPENDENT_SHAPE_REPRESENTATION (
 {self._str_args()}
 )
 '''
     
-    def __str__(self):
+    def _str_args(self):
         return f'''{super()._str_args()}
-    shape_rep    = {self.representation}
-    product      = {self.product}'''
+    shape_rep    = {clean_display(self.representation)}
+    product      = {clean_display(self.product)}'''
     
     def __get_arguments(self, conn):
         args = get_arguments(conn, self.key)
         
-        self.representation = args[1]
-        self.product = ProductDefinitionShape(conn, args[2])
+        self.representation = ShapeRepresentationRelationship(conn, args[0])
+        self.product = ProductDefinitionShape(conn, args[1])

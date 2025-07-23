@@ -1,8 +1,9 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.axis2_placement3d import Axis2Placement3d
+from step_types.helpers import get_arguments, clean_display_list
+from step_types.cartesian_point import CartesianPoint
+from step_types.loop import Loop
 
-class SphericalSurface():
-    type_name = 'SPHERICAL_SURFACE'
+class PolyLoop(Loop):
+    type_name = 'POLY_LOOP'
 
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
@@ -16,8 +17,8 @@ class SphericalSurface():
 
     def _str_args(self):
         return f'''{super()._str_args()}
-    radius       = {self.radius}'''
-    
+    polygon      = {clean_display_list(self.polygon)}'''
+
     def __get_arguments(self, conn):
         args = get_arguments(conn, self.key)
-        self.radius = args[2]
+        self.polygon = [CartesianPoint(conn, p) for p in args[1]]

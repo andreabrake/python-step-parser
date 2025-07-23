@@ -1,9 +1,8 @@
 from step_types.helpers import get_arguments, clean_display
-from step_types.direction import Direction
-from step_types.geometric_representation_item import GeometricRepresentationItem
+from step_types.conic import Conic
 
-class Vector(GeometricRepresentationItem):
-    type_name = 'VECTOR'
+class Hyperbola(Conic):
+    type_name = 'HYPERBOLA'
 
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
@@ -17,17 +16,17 @@ class Vector(GeometricRepresentationItem):
 
     def _str_args(self):
         return f'''{super()._str_args()}
-    orientation  = {clean_display(self.orientation)}
-    magnitude    = {self.magnitude}'''
+    semi_axis    = {self.semi_axis}
+    semi_axis_i  = {self.semi_imag_axis}'''
+
     
     def __get_arguments(self, conn):
         args = get_arguments(conn, self.key)
-        self.orientation = Direction(conn, args[1])
-        self.magnitude = args[2]
+        self.semi_axis = args[2]
+        self.semi_imag_axis = args[3]
 
     def get_geometry(self):
         return super().get_geometry() | {
             'type': self.type_name,
-            'orient': self.orientation.get_geometry(),
-            'mag': self.magnitude
+            'axes': [self.semi_axis, self.semi_imag_axis],
         }

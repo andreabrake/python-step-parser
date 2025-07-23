@@ -18,3 +18,7 @@ class Direction():
         args = get_arguments(conn, self.key)
         self.name = args[0]
         self.direction_ratios = args[1]
+
+    def get_geometry(self):
+        x,y,z = self.direction_ratios
+        return [float(x), float(y), float(z)]

@@ -19,3 +19,6 @@ class VertexPoint():
         args = get_arguments(conn, self.key)
         self.name = args[0]
         self.geometry = CartesianPoint(conn, args[1])
+
+    def get_geometry(self): 
+        return self.geometry.get_geometry()

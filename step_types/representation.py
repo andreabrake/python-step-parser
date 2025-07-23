@@ -3,12 +3,14 @@ from step_types.abstract_types import representation_item, context
 from step_types.transient import Transient
 
 class Representation(Transient):
+    type_name = 'SHAPE_REPRESENTATION'
+
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
         self.__get_arguments(conn)
 
     def __str__(self):
-        return f'''SHAPE_REPRESENTATION (
+        return f'''{self.type_name} (
 {self._str_args()}
 )
 '''
@@ -23,5 +25,5 @@ class Representation(Transient):
         args = get_arguments(conn, self.key)
         
         self.name = args[0]
-        self.items = [representation_item.parse(a) for a in args[1]]
-        self.context = context.parse(args[2])
+        self.items = [representation_item.parse(conn, a) for a in args[1]]
+        self.context = context.parse(conn, args[2])

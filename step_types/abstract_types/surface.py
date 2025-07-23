@@ -8,7 +8,9 @@ from step_types.spherical_surface import SphericalSurface
 from step_types.toroidal_surface import ToroidalSurface
 from step_types.b_spline_surface_with_knots import BSplineSurfaceWithKnots
 
-def parse_surface(conn, id: int):
+from step_types.surface import Surface
+
+def parse_surface(conn, id: int) -> Surface:
     type = get_entity_type(conn, id)
     # print('parsing surface', type)
     if type == 'CONICAL_SURFACE':

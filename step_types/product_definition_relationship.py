@@ -8,7 +8,7 @@ class ProductDefinitionRelationship(Transient):
 
     def __str__(self):
         return f'''PRODUDCT_DEFINITION_RELATIONSHIP (
-    {self._str_args()}
+{self._str_args()}
 )
 '''
     

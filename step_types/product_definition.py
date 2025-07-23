@@ -4,12 +4,12 @@ from step_types.transient import Transient
 
 class ProductDefinition(Transient):
     def __init__(self, conn, key: int):
-        super().__init__(self, conn, key)
+        super().__init__(conn, key)
         self.__get_arguments(conn)
 
     def __str__(self):
         return f'''PRODUCT_DEFINITION (
-    {self._str_args()}
+{self._str_args()}
 )
 '''
     
@@ -24,4 +24,4 @@ class ProductDefinition(Transient):
         
         self.name = args[0]
         self.description = args[1]
-        self.definition = characterized_definition.parse(args[3])
+        self.definition = characterized_definition.parse(conn, args[2])

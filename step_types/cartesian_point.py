@@ -1,20 +1,28 @@
 from step_types.helpers import get_arguments
+from step_types.point import Point
 
-class CartesianPoint():
+class CartesianPoint(Point):
+    type_name = 'CARTESIAN_POINT'
+
     def __init__(self, conn, key: int):
-        self.key = key
+        super().__init__(conn, key)
         self.__get_arguments(conn)
-        pass
 
     def __str__(self):
-        return f'''CARTESIAN_POINT (
-    key          = {self.key}
-    name         = {self.name}
-    coordinates  = {self.coordinates}
+        return f'''{self.type_name} (
+{self._str_args()}
 )
 '''
-    
+
+    def _str_args(self):
+        return f'''{super()._str_args()}
+    coordinates  = {self.coordinates}'''
+
     def __get_arguments(self, conn):
         args = get_arguments(conn, self.key)
         self.name = args[0]
         self.coordinates = args[1]
+        
+    def get_geometry(self):
+        x,y,z = self.coordinates
+        return [float(x), float(y), float(z)]

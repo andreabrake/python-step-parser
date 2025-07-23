@@ -1,20 +1,20 @@
-from step_types.helpers import get_arguments, clean_display, clean_display_list
-from step_types.product_definition import ProductDefinition
+from step_types.topological_representation_item import TopologicalRepresentationItem
 
-class ProductDefinitionShape(ProductDefinition):
+class Loop(TopologicalRepresentationItem):
+    type_name = 'Loop'
+
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
         self.__get_arguments(conn)
 
     def __str__(self):
-        return f'''PRODUCT_DEFINITION_SHAPE (
+        return f'''{self.type_name} (
 {self._str_args()}
 )
 '''
-    
+
     def _str_args(self):
         return f'''{super()._str_args()}'''
     
     def __get_arguments(self, conn):
-        # No special arguments
         pass

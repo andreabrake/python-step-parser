@@ -24,3 +24,11 @@ class Axis2Placement3d():
         self.location = CartesianPoint(conn, args[1])
         self.axis = Direction(conn, args[2])
         self.direction = Direction(conn, args[2])
+
+        
+    def get_geometry(self):
+        return {
+            'location': self.location.get_geometry(),
+            'axis': self.axis.get_geometry(),
+            'direction': self.direction.get_geometry(),
+        }

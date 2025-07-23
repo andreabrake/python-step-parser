@@ -8,7 +8,7 @@ class ProductDefinitionUsage(ProductDefinitionRelationship):
 
     def __str__(self):
         return f'''PRODUCT_DEFINITION_USAGE (
-    {self._str_args()}
+{self._str_args()}
 )
 '''
     

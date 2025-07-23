@@ -1,22 +1,27 @@
 from step_types.helpers import get_arguments, clean_display, clean_display_list
-from step_types.product_definition_usage import ProductDefinitionUsage
+from step_types.transient import Transient 
+from step_types.product import Product
 
-class AssemblyComponentUsage(ProductDefinitionUsage):
+class ProductDefinitionFormation(Transient):
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
         self.__get_arguments(conn)
 
     def __str__(self):
-        return f'''ASSEMBLY_COMPONENT_USAGE (
+        return f'''PRODUCT_DEFINITION_FORMATION (
 {self._str_args()}
 )
 '''
     
     def _str_args(self):
         return f'''{super()._str_args()}
-    designator   = {self.reference_designator}'''
+    id           = {self.id}
+    description  = {self.description}
+    product      = {clean_display(self.product)}'''
     
     def __get_arguments(self, conn):
         args = get_arguments(conn, self.key)
         
-        self.reference_designator = args[5]
+        self.id = args[0]
+        self.description = args[1]
+        self.product = Product(conn, args[2])

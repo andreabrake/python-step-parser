@@ -3,12 +3,12 @@ from step_types.assembly_component_usage import AssemblyComponentUsage
 
 class NextAssemblyUsageOccurrence(AssemblyComponentUsage):
     def __init__(self, conn, key: int):
-        super().__init__(self, conn, key)
+        super().__init__(conn, key)
         self.__get_arguments(conn)
 
     def __str__(self):
         return f'''NEXT_ASSEMBLY_USAGE_OCCURRENCE (
-    {self._str_args()}
+{self._str_args()}
 )
 '''
     

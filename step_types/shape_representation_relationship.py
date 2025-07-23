@@ -1,11 +1,12 @@
-from step_types.helpers import get_all_complex_args, clean_display, clean_display_list
-from step_types.abstract_types import representation_item, context
+from step_types.helpers import get_complex_or_base_arguments, clean_display, clean_display_list
+from step_types.abstract_types import representation_item
 from step_types.transient import Transient
-from step_types.shape_representation import ShapeRepresentation
 from step_types.item_defined_transformation import ItemDefinedTransformation
 
 
 class ShapeRepresentationRelationship(Transient):
+    type_name = 'SHAPE_REPRESENTATION_RELATIONSHIP'
+
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
         self.__get_arguments(conn)
@@ -16,7 +17,7 @@ class ShapeRepresentationRelationship(Transient):
 )
 '''
     
-    def __str__(self):
+    def _str_args(self):
         return f'''{super()._str_args()}
     name         = {self.name}
     description  = {self.description}
@@ -25,14 +26,17 @@ class ShapeRepresentationRelationship(Transient):
     transform    = {clean_display(self.transformation)}'''
     
     def __get_arguments(self, conn):
-        args = get_all_complex_args(conn,
-                                    self.key,
-                                    ['REPRESENTATION_RELATIONSHIP',
-                                     'REPRESENTATION_RELATIONSHIP_WITH_TRANSFORMATION',
-                                     'SHAPE_REPRESENTATION_RELATIONSHIP'])
+        args = get_complex_or_base_arguments(conn,
+                                             self.key,
+                                             ['REPRESENTATION_RELATIONSHIP',
+                                              'REPRESENTATION_RELATIONSHIP_WITH_TRANSFORMATION',
+                                              'SHAPE_REPRESENTATION_RELATIONSHIP'])
         
         self.name = args[0]
         self.description = args[1]
-        self.shape_representation_1 = ShapeRepresentation(conn, args[2])
-        self.shape_representation_2 = ShapeRepresentation(conn, args[3])
-        self.transformation = ItemDefinedTransformation(conn, args[4])
+        self.shape_representation_1 = representation_item.parse(conn, args[2])
+        self.shape_representation_2 = representation_item.parse(conn, args[3])
+        if len(args) > 4:
+            self.transformation = ItemDefinedTransformation(conn, args[4])
+        else:
+            self.transformation = None

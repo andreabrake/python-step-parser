@@ -1,8 +1,9 @@
 from step_types.helpers import get_arguments, clean_display
 from step_types.axis2_placement3d import Axis2Placement3d
+from step_types.surface import Surface
 
-class SphericalSurface():
-    type_name = 'SPHERICAL_SURFACE'
+class ElementarySurface(Surface):
+    type_name = 'ELEMENTARY_SURFACE'
 
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
@@ -16,8 +17,14 @@ class SphericalSurface():
 
     def _str_args(self):
         return f'''{super()._str_args()}
-    radius       = {self.radius}'''
-    
+    position     = {clean_display(self.position)}'''
+
     def __get_arguments(self, conn):
         args = get_arguments(conn, self.key)
-        self.radius = args[2]
+        self.position = Axis2Placement3d(conn, args[1])
+
+    def get_geometry(self):
+        return {
+            'type': 'ELEMENTARY',
+            'position': self.position.get_geometry()
+        }

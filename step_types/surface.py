@@ -1,13 +1,13 @@
-from step_types.helpers import get_arguments, clean_display, clean_display_list
-from step_types.product_definition import ProductDefinition
+from step_types.helpers import get_complex_or_base_arguments
+from step_types.geometric_representation_item import GeometricRepresentationItem
 
-class ProductDefinitionShape(ProductDefinition):
+class Surface(GeometricRepresentationItem):
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
         self.__get_arguments(conn)
 
     def __str__(self):
-        return f'''PRODUCT_DEFINITION_SHAPE (
+        return f'''SURFACE (
 {self._str_args()}
 )
 '''
@@ -16,5 +16,4 @@ class ProductDefinitionShape(ProductDefinition):
         return f'''{super()._str_args()}'''
     
     def __get_arguments(self, conn):
-        # No special arguments
         pass
