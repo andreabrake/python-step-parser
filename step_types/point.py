@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.geometric_representation_item import GeometricRepresentationItem
+from .helpers import get_arguments, clean_display
+from .geometric_representation_item import GeometricRepresentationItem
 
 class Point(GeometricRepresentationItem):
     type_name = 'POINT'

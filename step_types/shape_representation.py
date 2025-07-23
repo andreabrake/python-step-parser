@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments, clean_display, clean_display_list
-from step_types.representation import Representation
+from .helpers import get_arguments, clean_display, clean_display_list
+from .representation import Representation
 
 class ShapeRepresentation(Representation):
     type_name = 'SHAPE_REPRESENTATION'

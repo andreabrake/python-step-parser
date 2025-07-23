@@ -1,6 +1,6 @@
-from step_types.helpers import get_arguments, clean_display_list
-from step_types.cartesian_point import CartesianPoint
-from step_types.loop import Loop
+from .helpers import get_arguments, clean_display_list
+from .cartesian_point import CartesianPoint
+from .loop import Loop
 
 class PolyLoop(Loop):
     type_name = 'POLY_LOOP'

@@ -1,5 +1,5 @@
-from step_types.helpers import get_complex_or_base_arguments, clean_display_list
-from step_types.b_spline_curve import BSPlineCurve
+from .helpers import get_complex_or_base_arguments, clean_display_list
+from .b_spline_curve import BSPlineCurve
 
 class BSplineCurveWithKnots(BSPlineCurve):
     type_name = 'B_SPLINE_CURVE_WITH_KNOTS'

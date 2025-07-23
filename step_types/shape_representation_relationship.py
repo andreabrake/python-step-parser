@@ -1,7 +1,7 @@
-from step_types.helpers import get_complex_or_base_arguments, clean_display, clean_display_list
-from step_types.abstract_types import representation_item
-from step_types.transient import Transient
-from step_types.item_defined_transformation import ItemDefinedTransformation
+from .helpers import get_complex_or_base_arguments, clean_display, clean_display_list
+from .abstract_types import representation_item
+from .transient import Transient
+from .item_defined_transformation import ItemDefinedTransformation
 
 
 class ShapeRepresentationRelationship(Transient):

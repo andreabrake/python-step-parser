@@ -1,6 +1,6 @@
-from step_types.helpers import get_arguments, clean_display_list
-from step_types.advanced_face import AdvancedFace
-from step_types.transient import Transient
+from .helpers import get_arguments, clean_display_list
+from .advanced_face import AdvancedFace
+from .transient import Transient
 
 class ClosedShell(Transient):
     type_name = 'CLOSED_SHELL'

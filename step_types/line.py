@@ -1,7 +1,7 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.cartesian_point import CartesianPoint
-from step_types.vector import Vector
-from step_types.curve import Curve
+from .helpers import get_arguments, clean_display
+from .cartesian_point import CartesianPoint
+from .vector import Vector
+from .curve import Curve
 
 class Line(Curve):
     type_name = 'LINE'

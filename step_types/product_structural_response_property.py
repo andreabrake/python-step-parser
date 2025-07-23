@@ -1,4 +1,4 @@
-from step_types.product_definition import ProductDefinition
+from .product_definition import ProductDefinition
 
 class StructuralResponseProperty(ProductDefinition):
     def __init__(self, conn, key: int):

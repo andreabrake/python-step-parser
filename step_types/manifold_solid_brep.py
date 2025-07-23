@@ -1,6 +1,6 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.closed_shell import ClosedShell
-from step_types.transient import Transient
+from .helpers import get_arguments, clean_display
+from .closed_shell import ClosedShell
+from .transient import Transient
 
 class ManifoldSolidBrep(Transient):
     type_name = 'MANIFOLD_SOLID_BREP'

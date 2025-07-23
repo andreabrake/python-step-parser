@@ -1,5 +1,5 @@
-from step_types.helpers import get_complex_or_base_arguments
-from step_types.si_unit import SIUnit
+from .helpers import get_complex_or_base_arguments
+from .si_unit import SIUnit
 
 class LengthUnit(SIUnit):
     def __init__(self, conn, key: int):

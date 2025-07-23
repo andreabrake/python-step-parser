@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments
-from step_types.representation_item import RepresentationItem
+from .helpers import get_arguments
+from .representation_item import RepresentationItem
 
 class TopologicalRepresentationItem(RepresentationItem):
     def __init__(self, conn, key: int):

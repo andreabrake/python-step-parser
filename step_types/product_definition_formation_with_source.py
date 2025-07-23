@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments, clean_display, clean_display_list
-from step_types.product_definition_formation import ProductDefinitionFormation
+from .helpers import get_arguments, clean_display, clean_display_list
+from .product_definition_formation import ProductDefinitionFormation
 
 class ProductDefinitionFormationWithSource(ProductDefinitionFormation):
     def __init__(self, conn, key: int):

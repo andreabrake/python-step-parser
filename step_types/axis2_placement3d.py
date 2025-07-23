@@ -1,6 +1,6 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.cartesian_point import CartesianPoint
-from step_types.direction import Direction
+from .helpers import get_arguments, clean_display
+from .cartesian_point import CartesianPoint
+from .direction import Direction
 
 class Axis2Placement3d():
     def __init__(self, conn, key: int):

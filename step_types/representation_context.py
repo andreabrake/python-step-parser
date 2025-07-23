@@ -1,5 +1,5 @@
-from step_types.helpers import get_complex_or_base_arguments
-from step_types.transient import Transient
+from .helpers import get_complex_or_base_arguments
+from .transient import Transient
 
 class RepresentationContext(Transient):
     def __init__(self, conn, key: int):

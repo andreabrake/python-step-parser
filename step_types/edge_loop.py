@@ -1,6 +1,6 @@
-from step_types.helpers import get_arguments, clean_display_list
-from step_types.oriented_edge import OrientedEdge
-from step_types.loop import Loop
+from .helpers import get_arguments, clean_display_list
+from .oriented_edge import OrientedEdge
+from .loop import Loop
 
 class EdgeLoop(Loop):
     type_name = 'EDGE_LOOP'

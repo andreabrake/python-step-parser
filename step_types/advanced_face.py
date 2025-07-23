@@ -1,7 +1,7 @@
-from step_types.helpers import get_arguments, clean_display, clean_display_list
-from step_types.face_bound import FaceBound
-from step_types.abstract_types.surface import parse_surface
-from step_types.transient import Transient
+from .helpers import get_arguments, clean_display, clean_display_list
+from .face_bound import FaceBound
+from .abstract_types.surface import parse_surface
+from .transient import Transient
 
 class AdvancedFace(Transient):
     type_name = 'ADVANCED_FACE'

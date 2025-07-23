@@ -1,6 +1,6 @@
-from step_types.helpers import get_complex_or_base_arguments, clean_display_list
-from step_types.bounded_curve import BoundedCurve
-from step_types.cartesian_point import CartesianPoint
+from .helpers import get_complex_or_base_arguments, clean_display_list
+from .bounded_curve import BoundedCurve
+from .cartesian_point import CartesianPoint
 
 class BSPlineCurve(BoundedCurve):
     type_name = 'B_SPLINE_CURVE'

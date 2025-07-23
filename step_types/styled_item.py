@@ -1,6 +1,6 @@
-from step_types.helpers import get_arguments, clean_display, clean_display_list
-from step_types.abstract_types.item import parse_item
-from step_types.presentation_style_assignment import PresentationStyleAssignment
+from .helpers import get_arguments, clean_display, clean_display_list
+from .abstract_types.item import parse_item
+from .presentation_style_assignment import PresentationStyleAssignment
 
 class StyledItem():
     def __init__(self, conn, key: int):

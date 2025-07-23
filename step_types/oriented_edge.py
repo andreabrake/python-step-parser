@@ -1,6 +1,6 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.edge_curve import EdgeCurve
-from step_types.edge import Edge
+from .helpers import get_arguments, clean_display
+from .edge_curve import EdgeCurve
+from .edge import Edge
 
 class OrientedEdge(Edge):
     type_name = 'ORIENTED_EDGE'

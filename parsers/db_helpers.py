@@ -1,4 +1,4 @@
-from helpers import split_arguments, classify_arg
+from .helpers import split_arguments, classify_arg
 import sqlite3
 from typing import List, Dict, Union
 

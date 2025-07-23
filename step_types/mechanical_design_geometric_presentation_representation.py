@@ -1,6 +1,6 @@
-from step_types.helpers import get_arguments, clean_display_list, clean_display
-from step_types.styled_item import StyledItem
-from step_types.geometric_representation_context import GeometricRepresentationContext
+from .helpers import get_arguments, clean_display_list, clean_display
+from .styled_item import StyledItem
+from .geometric_representation_context import GeometricRepresentationContext
 
 class MechanicalDesignGeometricPresentationRepresentation():
     def __init__(self, conn, key: int):

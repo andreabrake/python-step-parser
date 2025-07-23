@@ -1,7 +1,7 @@
-from step_types.helpers import  get_arguments, clean_display
-from step_types.vertex_point import VertexPoint
-from step_types.edge import Edge
-from step_types.abstract_types.curve import parse_curve
+from .helpers import  get_arguments, clean_display
+from .vertex_point import VertexPoint
+from .edge import Edge
+from .abstract_types.curve import parse_curve
 
 class EdgeCurve(Edge):
     type_name = 'EDGE_CURVE'

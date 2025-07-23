@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.application_context import ApplicationContext
+from .helpers import get_arguments, clean_display
+from .application_context import ApplicationContext
 
 class ProductContext():
     def __init__(self, conn, key: int):

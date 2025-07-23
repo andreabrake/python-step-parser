@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.fill_area_style import FillAreaStyle
+from .helpers import get_arguments, clean_display
+from .fill_area_style import FillAreaStyle
 
 class SurfaceStyleFillArea():
     def __init__(self, conn, key: int):

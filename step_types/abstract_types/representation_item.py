@@ -1,9 +1,9 @@
-from step_types.helpers import get_entity_type
+from ..helpers import get_entity_type
 
-from step_types.axis2_placement3d import Axis2Placement3d
-from step_types.advanced_face import AdvancedFace
-from step_types.manifold_solid_brep import ManifoldSolidBrep
-from step_types.shape_representation import ShapeRepresentation
+from ..axis2_placement3d import Axis2Placement3d
+from ..advanced_face import AdvancedFace
+from ..manifold_solid_brep import ManifoldSolidBrep
+from ..shape_representation import ShapeRepresentation
 
 dynamic_register = {}
 

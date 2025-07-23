@@ -1,6 +1,6 @@
-from step_types.helpers import get_arguments, clean_display, clean_display_list
-from step_types.abstract_types import representation_item
-from step_types.shape_representation import ShapeRepresentation
+from .helpers import get_arguments, clean_display, clean_display_list
+from .abstract_types import representation_item
+from .shape_representation import ShapeRepresentation
 
 class AdvancedBrepShapeRepresentation(ShapeRepresentation):
     type_name = 'ADVANCED_BREP_SHAPE_REPRESENTATION'

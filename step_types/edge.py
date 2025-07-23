@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.topological_representation_item import TopologicalRepresentationItem
+from .helpers import get_arguments, clean_display
+from .topological_representation_item import TopologicalRepresentationItem
 
 class Edge(TopologicalRepresentationItem):
     type_name = 'EDGE'

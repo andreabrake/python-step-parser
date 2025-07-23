@@ -1,6 +1,6 @@
-from step_types.helpers import get_arguments, clean_display, clean_display_list
-from step_types.abstract_types import color
-from step_types.surfacer_style_transparent import SurfaceStyleTransparent
+from .helpers import get_arguments, clean_display, clean_display_list
+from .abstract_types import color
+from .surfacer_style_transparent import SurfaceStyleTransparent
 
 class SurfaceStyleRenderingWithProperties():
     def __init__(self, conn, key: int):

@@ -1,7 +1,7 @@
-from step_types.helpers import get_entity_type
+from ..helpers import get_entity_type
 
-from step_types.colour_rgb import ColourRGB
-from step_types.draughting_pre_defined_colour import DraughtingPreDefinedColour
+from ..colour_rgb import ColourRGB
+from ..draughting_pre_defined_colour import DraughtingPreDefinedColour
 
 def parse(conn, id: int):
     type = get_entity_type(conn, id)

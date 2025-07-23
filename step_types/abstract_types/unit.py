@@ -1,9 +1,9 @@
-from step_types.helpers import get_entity_type, get_complex_items
+from ..helpers import get_entity_type, get_complex_items
 
-from step_types.solid_angle_unit import SolidAngleUnit
-from step_types.plane_angle_unit import PlaneAngleUnit
-from step_types.length_unit import LengthUnit
-from step_types.uncertainty_measure_with_unit import UncertaintyMeasureWithUnit
+from ..solid_angle_unit import SolidAngleUnit
+from ..plane_angle_unit import PlaneAngleUnit
+from ..length_unit import LengthUnit
+from ..uncertainty_measure_with_unit import UncertaintyMeasureWithUnit
 
 def parse(conn, id: int):
     type = get_entity_type(conn, id)

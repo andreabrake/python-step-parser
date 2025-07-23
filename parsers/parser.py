@@ -1,8 +1,8 @@
 import re
 from typing import List, Dict, Union
-from complex_type_parsers import parse_complex_type
-from helpers import split_arguments
-from db_helpers import init_db, save_entities_to_db
+from .complex_type_parsers import parse_complex_type
+from .helpers import split_arguments
+from .db_helpers import init_db, save_entities_to_db
 
 # --- STEP Parsing Functions ---
 

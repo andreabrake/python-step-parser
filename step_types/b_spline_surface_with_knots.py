@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments
-from step_types.b_spline_surface import BSPlineSurface
+from .helpers import get_arguments
+from .b_spline_surface import BSPlineSurface
 
 class BSplineSurfaceWithKnots(BSPlineSurface):
     type_name = 'B_SPLINE_SURFACE_WITH_KNOTS'

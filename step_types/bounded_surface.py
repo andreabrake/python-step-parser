@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.surface import Surface
+from .helpers import get_arguments, clean_display
+from .surface import Surface
 
 class BoundedSurface(Surface):
     type_name = 'BOUNDED_SURFACE'

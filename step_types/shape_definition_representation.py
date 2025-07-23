@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments, clean_display, clean_display_list
-from step_types.abstract_types import representation_item, context
+from .helpers import get_arguments, clean_display, clean_display_list
+from .abstract_types import representation_item, context
 
 class ShapeDefinitionRepresentation():
     def __init__(self, conn, key: int):

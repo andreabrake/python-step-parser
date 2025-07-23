@@ -1,11 +1,11 @@
-from step_types.helpers import get_entity_type, get_complex_items
+from ..helpers import get_entity_type, get_complex_items
 
-from step_types.line import Line
-from step_types.circle import Circle
-from step_types.ellipse import Ellipse
-from step_types.b_spline_curve_with_knots import BSplineCurveWithKnots
+from ..line import Line
+from ..circle import Circle
+from ..ellipse import Ellipse
+from ..b_spline_curve_with_knots import BSplineCurveWithKnots
 
-from step_types.rational_b_spline_curve import RationalBSplineCurve
+from ..rational_b_spline_curve import RationalBSplineCurve
 
 def parse_curve(conn, id: int):
     type = get_entity_type(conn, id)

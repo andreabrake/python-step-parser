@@ -1,6 +1,6 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.abstract_types import loop
-from step_types.topological_representation_item import TopologicalRepresentationItem
+from .helpers import get_arguments, clean_display
+from .abstract_types import loop
+from .topological_representation_item import TopologicalRepresentationItem
 
 class FaceBound(TopologicalRepresentationItem):
     type_name = 'FACE_BOUND'

@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments
-from step_types.point import Point
+from .helpers import get_arguments
+from .point import Point
 
 class CartesianPoint(Point):
     type_name = 'CARTESIAN_POINT'

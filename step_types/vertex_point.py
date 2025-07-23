@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.cartesian_point import CartesianPoint
+from .helpers import get_arguments, clean_display
+from .cartesian_point import CartesianPoint
 
 class VertexPoint():
     def __init__(self, conn, key: int):

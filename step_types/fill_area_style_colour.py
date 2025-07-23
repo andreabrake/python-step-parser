@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.abstract_types import color
+from .helpers import get_arguments, clean_display
+from .abstract_types import color
 
 class FillAreaStyleColour():
     def __init__(self, conn, key: int):

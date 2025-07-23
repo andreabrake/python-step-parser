@@ -1,6 +1,6 @@
-from step_types.helpers import get_complex_or_base_arguments, clean_display_list
-from step_types.representation_context import RepresentationContext
-from step_types.abstract_types import unit
+from .helpers import get_complex_or_base_arguments, clean_display_list
+from .representation_context import RepresentationContext
+from .abstract_types import unit
 
 
 class GlobalUncertaintyAssignedContext(RepresentationContext):

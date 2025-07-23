@@ -1,6 +1,6 @@
-from step_types.helpers import get_arguments, clean_display, clean_display_list
-from step_types.transient import Transient 
-from step_types.product import Product
+from .helpers import get_arguments, clean_display, clean_display_list
+from .transient import Transient 
+from .product import Product
 
 class ProductDefinitionFormation(Transient):
     def __init__(self, conn, key: int):

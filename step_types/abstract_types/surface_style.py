@@ -1,7 +1,7 @@
-from step_types.helpers import get_entity_type
+from ..helpers import get_entity_type
 
-from step_types.surface_style_fill_area import SurfaceStyleFillArea
-from step_types.surface_style_rendering_with_properties import SurfaceStyleRenderingWithProperties
+from ..surface_style_fill_area import SurfaceStyleFillArea
+from ..surface_style_rendering_with_properties import SurfaceStyleRenderingWithProperties
 
 def parse(conn, id: int):
     type = get_entity_type(conn, id)

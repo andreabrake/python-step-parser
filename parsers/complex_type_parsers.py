@@ -1,6 +1,6 @@
 import re
 from typing import List, Dict, Union
-from helpers import split_arguments
+from .helpers import split_arguments
 import itertools
 
 def split_complex_type_entities(complex_type_str: str):

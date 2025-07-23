@@ -1,6 +1,6 @@
-from step_types.helpers import get_entity_type, get_complex_items
-from step_types.next_assembly_usage_occurance import NextAssemblyUsageOccurrence
-from step_types.product_definition_formation_with_source import ProductDefinitionFormationWithSource
+from ..helpers import get_entity_type, get_complex_items
+from ..next_assembly_usage_occurance import NextAssemblyUsageOccurrence
+from ..product_definition_formation_with_source import ProductDefinitionFormationWithSource
 
 def parse(conn, id: int):
     type = get_entity_type(conn, id)

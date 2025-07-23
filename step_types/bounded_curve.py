@@ -1,5 +1,5 @@
-from step_types.helpers import get_complex_or_base_arguments
-from step_types.curve import Curve
+from .helpers import get_complex_or_base_arguments
+from .curve import Curve
 
 class BoundedCurve(Curve):
     type_name = 'BOUNDED_CURVE'

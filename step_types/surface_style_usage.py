@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.surface_side_style import SurfaceSideStyle
+from .helpers import get_arguments, clean_display
+from .surface_side_style import SurfaceSideStyle
 
 class SurfaceStyleUsage():
     def __init__(self, conn, key: int):

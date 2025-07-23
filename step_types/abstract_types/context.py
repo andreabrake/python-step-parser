@@ -1,5 +1,5 @@
-from step_types.helpers import get_entity_type, get_complex_items
-from step_types.geometric_representation_context import GeometricRepresentationContext
+from ..helpers import get_entity_type, get_complex_items
+from ..geometric_representation_context import GeometricRepresentationContext
 
 def parse(conn, id: int):
     type = get_entity_type(conn, id)

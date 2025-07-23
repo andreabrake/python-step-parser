@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments, clean_display, clean_display_list
-from step_types.product_definition_usage import ProductDefinitionUsage
+from .helpers import get_arguments, clean_display, clean_display_list
+from .product_definition_usage import ProductDefinitionUsage
 
 class AssemblyComponentUsage(ProductDefinitionUsage):
     def __init__(self, conn, key: int):

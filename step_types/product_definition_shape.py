@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments, clean_display, clean_display_list
-from step_types.product_definition import ProductDefinition
+from .helpers import get_arguments, clean_display, clean_display_list
+from .product_definition import ProductDefinition
 
 class ProductDefinitionShape(ProductDefinition):
     def __init__(self, conn, key: int):

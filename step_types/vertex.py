@@ -1,6 +1,6 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.cartesian_point import CartesianPoint
-from step_types.topological_representation_item import TopologicalRepresentationItem
+from .helpers import get_arguments, clean_display
+from .cartesian_point import CartesianPoint
+from .topological_representation_item import TopologicalRepresentationItem
 
 class Vertex(TopologicalRepresentationItem):
     type_name = 'VERTEX'

@@ -1,4 +1,4 @@
-from step_types.helpers import get_arguments
+from .helpers import get_arguments
 
 class Direction():
     def __init__(self, conn, key: int):

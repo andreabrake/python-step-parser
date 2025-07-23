@@ -1,6 +1,6 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.vertex_point import VertexPoint
-from step_types.loop import Loop
+from .helpers import get_arguments, clean_display
+from .vertex_point import VertexPoint
+from .loop import Loop
 
 class VertexLoop(Loop):
     type_name = 'VERTEX_LOOP'

@@ -1,9 +1,9 @@
-from step_types.helpers import get_entity_type
+from ..helpers import get_entity_type
 
-from step_types.edge_loop import EdgeLoop
-from step_types.vertex_loop import VertexLoop
-from step_types.poly_loop import PolyLoop
-from step_types.loop import Loop
+from ..edge_loop import EdgeLoop
+from ..vertex_loop import VertexLoop
+from ..poly_loop import PolyLoop
+from ..loop import Loop
 
 
 def parse(conn, id: int) -> Loop:

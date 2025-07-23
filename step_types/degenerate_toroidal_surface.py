@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.toroidal_surface import ToroidalSurface
+from .helpers import get_arguments, clean_display
+from .toroidal_surface import ToroidalSurface
 
 class DegenerateToroidalSurface(ToroidalSurface):
     type_name = 'DEGENERATE_TOROIDAL_SURFACE'

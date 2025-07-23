@@ -1,5 +1,5 @@
-from step_types.helpers import get_complex_or_base_arguments
-from step_types.representation_context import RepresentationContext
+from .helpers import get_complex_or_base_arguments
+from .representation_context import RepresentationContext
 
 class GeometricRepresentationContext(RepresentationContext):
     def __init__(self, conn, key: int):

@@ -1,6 +1,6 @@
-from step_types.helpers import get_arguments, clean_display_doublelist
-from step_types.bounded_surface import BoundedSurface
-from step_types.cartesian_point import CartesianPoint
+from .helpers import get_arguments, clean_display_doublelist
+from .bounded_surface import BoundedSurface
+from .cartesian_point import CartesianPoint
 
 class BSPlineSurface(BoundedSurface):
     type_name = 'B_SPLINE_SURFACE'

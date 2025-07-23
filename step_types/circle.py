@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.conic import Conic
+from .helpers import get_arguments, clean_display
+from .conic import Conic
 
 class Circle(Conic):
     type_name = 'CIRCLE'

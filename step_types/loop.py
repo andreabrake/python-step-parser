@@ -1,4 +1,4 @@
-from step_types.topological_representation_item import TopologicalRepresentationItem
+from .topological_representation_item import TopologicalRepresentationItem
 
 class Loop(TopologicalRepresentationItem):
     type_name = 'Loop'

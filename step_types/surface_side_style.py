@@ -1,6 +1,6 @@
-from step_types.helpers import get_arguments, clean_display_list
-from step_types.surface_style_fill_area import SurfaceStyleFillArea
-from step_types.abstract_types import surface_style
+from .helpers import get_arguments, clean_display_list
+from .surface_style_fill_area import SurfaceStyleFillArea
+from .abstract_types import surface_style
 
 class SurfaceSideStyle():
     def __init__(self, conn, key: int):

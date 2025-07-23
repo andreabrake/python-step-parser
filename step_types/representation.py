@@ -1,6 +1,6 @@
-from step_types.helpers import get_arguments, clean_display, clean_display_list
-from step_types.abstract_types import representation_item, context
-from step_types.transient import Transient
+from .helpers import get_arguments, clean_display, clean_display_list
+from .abstract_types import representation_item, context
+from .transient import Transient
 
 class Representation(Transient):
     type_name = 'SHAPE_REPRESENTATION'

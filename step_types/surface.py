@@ -1,5 +1,5 @@
-from step_types.helpers import get_complex_or_base_arguments
-from step_types.geometric_representation_item import GeometricRepresentationItem
+from .helpers import get_complex_or_base_arguments
+from .geometric_representation_item import GeometricRepresentationItem
 
 class Surface(GeometricRepresentationItem):
     def __init__(self, conn, key: int):

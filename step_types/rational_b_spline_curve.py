@@ -1,5 +1,5 @@
-from step_types.helpers import get_complex_or_base_arguments, clean_display_list
-from step_types.b_spline_curve import BSPlineCurve
+from .helpers import get_complex_or_base_arguments, clean_display_list
+from .b_spline_curve import BSPlineCurve
 
 class RationalBSplineCurve(BSPlineCurve):
     type_name = 'RATIONAL_B_SPLINE_CURVE'

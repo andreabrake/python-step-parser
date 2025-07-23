@@ -1,14 +1,14 @@
-from step_types.helpers import get_entity_type, get_complex_items
+from ..helpers import get_entity_type, get_complex_items
 
-from step_types.conical_surface import ConicalSurface
-from step_types.cylindrical_surface import CylindricalSurface
-from step_types.degenerate_toroidal_surface import DegenerateToroidalSurface
-from step_types.plane import Plane
-from step_types.spherical_surface import SphericalSurface
-from step_types.toroidal_surface import ToroidalSurface
-from step_types.b_spline_surface_with_knots import BSplineSurfaceWithKnots
+from ..conical_surface import ConicalSurface
+from ..cylindrical_surface import CylindricalSurface
+from ..degenerate_toroidal_surface import DegenerateToroidalSurface
+from ..plane import Plane
+from ..spherical_surface import SphericalSurface
+from ..toroidal_surface import ToroidalSurface
+from ..b_spline_surface_with_knots import BSplineSurfaceWithKnots
 
-from step_types.surface import Surface
+from ..surface import Surface
 
 def parse_surface(conn, id: int) -> Surface:
     type = get_entity_type(conn, id)

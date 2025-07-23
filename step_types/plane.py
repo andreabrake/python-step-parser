@@ -1,5 +1,5 @@
-from step_types.helpers import get_arguments, clean_display
-from step_types.elementary_surface import ElementarySurface
+from .helpers import get_arguments, clean_display
+from .elementary_surface import ElementarySurface
 
 class Plane(ElementarySurface):
     type_name = 'PLANE'

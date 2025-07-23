@@ -1,7 +1,7 @@
-from step_types.helpers import get_arguments, clean_display, clean_display_list
-from step_types.transient import Transient
-from step_types.product_definition_shape import ProductDefinitionShape
-from step_types.shape_representation_relationship import ShapeRepresentationRelationship
+from .helpers import get_arguments, clean_display, clean_display_list
+from .transient import Transient
+from .product_definition_shape import ProductDefinitionShape
+from .shape_representation_relationship import ShapeRepresentationRelationship
 
 class ContextDependentShapeRepresentation(Transient):
     def __init__(self, conn, key: int):
