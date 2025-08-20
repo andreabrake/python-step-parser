@@ -1,16 +1,17 @@
-from .helpers import get_arguments, clean_display, clean_display_list
-from .abstract_types import representation_item, context
-from .transient import Transient
+from .helpers import get_arguments, clean_display, clean_display_list, ChildTypeRegister
+from . import representation_item
+from . import transient
+from . import representation_context
 
-class Representation(Transient):
-    type_name = 'SHAPE_REPRESENTATION'
-
-    def __init__(self, conn, key: int, resolve_children: bool = True):
+type_name = 'REPRESENTATION'
+class Representation(transient.Transient):
+    type_name = type_name
+    def __init__(self, conn, key: int, resolve_children: bool = False):
         super().__init__(conn, key, resolve_children)
         self.__get_arguments(conn)
 
     def __str__(self):
-        return f'''{self.type_name} (
+        return f'''{type_name} (
 {self._str_args()}
 )
 '''
@@ -23,11 +24,14 @@ class Representation(Transient):
     
     def __get_arguments(self, conn):
         args = get_arguments(conn, self.key)
-        
+
         self.name = args[0]
         if self.resolve_children:
-            self.items = [representation_item.parse(conn, a) for a in args[1]]
+            self.items = [representation_item.child_type_register.parse(conn, a) for a in args[1]]
         else:
             self.items = args[1]
         
-        self.context = context.parse(conn, args[2])
+        self.context = representation_context.child_type_register.parse(conn, args[2])
+
+child_type_register = ChildTypeRegister(type_name, transient.child_type_register)
+child_type_register.register(type_name, lambda conn, key: Representation(conn, key))

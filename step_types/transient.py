@@ -1,4 +1,4 @@
-from .helpers import get_arguments, clean_display, clean_display_list
+from .helpers import get_entity_type, ChildTypeRegister
 
 class Transient():
     type_name: str = 'TRANSIENT'
@@ -20,3 +20,5 @@ class Transient():
     
     def get_geometry(self):
         return {}
+    
+child_type_register = ChildTypeRegister('Transient')

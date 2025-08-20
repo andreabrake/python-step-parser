@@ -1,16 +1,15 @@
-from .helpers import get_arguments, clean_display, clean_display_list
-from .abstract_types import representation_item
-from .shape_representation import ShapeRepresentation
+from .helpers import ChildTypeRegister
+from . import shape_representation
 
-class AdvancedBrepShapeRepresentation(ShapeRepresentation):
-    type_name = 'ADVANCED_BREP_SHAPE_REPRESENTATION'
-
-    def __init__(self, conn, key: int, resolve_children: bool = True):
+type_name = 'ADVANCED_BREP_SHAPE_REPRESENTATION'
+class AdvancedBrepShapeRepresentation(shape_representation.ShapeRepresentation):
+    type_name = type_name
+    def __init__(self, conn, key: int, resolve_children: bool = False):
         super().__init__(conn, key, resolve_children)
         self.__get_arguments(conn)
 
     def __str__(self):
-        return f'''{self.type_name} (
+        return f'''{type_name} (
 {self._str_args()}
 )
 '''
@@ -23,4 +22,5 @@ class AdvancedBrepShapeRepresentation(ShapeRepresentation):
         # No special args
         pass
 
-representation_item.register('ADVANCED_BREP_SHAPE_REPRESENTATION', lambda conn, key: AdvancedBrepShapeRepresentation(conn, key))
+child_type_register = ChildTypeRegister(type_name, shape_representation.child_type_register)
+child_type_register.register(type_name, lambda conn, key: AdvancedBrepShapeRepresentation(conn, key))

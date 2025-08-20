@@ -2,6 +2,49 @@ import sqlite3
 from typing import List
 import itertools
 
+class ChildTypeRegister():
+    def __init__(self, name, base_registers=None):
+        self.name = name
+        self.base_registers = base_registers
+        self.child_type_register = {}
+
+    def try_parse(self, conn, id: int):
+        type = get_entity_type(conn, id)
+        if type == 'COMPLEX':
+            complex_items = get_complex_items(conn, id)
+            complex_item_types = [i.type for i in complex_items]
+            for resolved_type in complex_item_types:
+                if resolved_type in self.child_type_register:
+                    # print('resolving', id, 'as', resolved_type)
+                    return self.child_type_register[resolved_type](conn, id)
+            return None
+        if type in self.child_type_register:
+            return self.child_type_register[type](conn, id)
+        return None
+
+    def parse(self, conn, id: int):
+        type = get_entity_type(conn, id)
+        if type == 'COMPLEX':
+            complex_items = get_complex_items(conn, id)
+            complex_item_types = [i.type for i in complex_items]
+            for resolved_type in complex_item_types:
+                if resolved_type in self.child_type_register:
+                    # print('resolving', id, 'as', resolved_type)
+                    return self.child_type_register[resolved_type](conn, id)
+            raise Exception(f'Cannot find context with type {type} [{','.join(complex_item_types)}]')
+        if type in self.child_type_register:
+            return self.child_type_register[type](conn, id)
+        raise Exception(f'Cannot find {self.name} with type {type}')
+    
+    def register(self, type_name: str, type_val):
+        self.child_type_register[type_name] = type_val
+        if self.base_registers is not None:
+            if isinstance(self.base_registers, list):
+                for r in self.base_registers:
+                    r.register(type_name, type_val)
+            else:
+                self.base_registers.register(type_name, type_val)
+            
 class ComplexItemDTO:
     type: str
     arg_offset: int
@@ -16,6 +59,7 @@ entity_type_cache = {}
 complex_item_cache = {}
 arg_cache = {}
 list_text_cache = {}
+parent_ref_cache = {}
 
 def parse_arg_value(value_type: str, value_text: str):
     if value_type == 'list':
@@ -148,7 +192,31 @@ def clean_display_list(vals, padding='    '):
     ]).replace('\n', f'\n{padding}').strip()}
 {padding}]'''
 
+def get_parents(id: int) -> List[int]:
+    return [] if id not in parent_ref_cache else parent_ref_cache[id]
 
+def get_representation_contexts(conn: sqlite3.Connection) -> List[int]:
+    cursor = conn.cursor()
+
+    cursor.execute(f"""
+                   SELECT id
+                   FROM step_entities
+                   WHERE type IN ('GEOMETRIC_REPRESENTATION_CONTEXT')
+                   ORDER BY id""")
+    
+    simple_entities = [int(row[0]) for row in cursor.fetchall()]
+    
+    cursor.execute(f"""
+                   SELECT distinct entity_id
+                   FROM step_complex_items
+                   WHERE type = 'GEOMETRIC_REPRESENTATION_CONTEXT'
+                   ORDER BY entity_id""")
+    
+    complex_entities = [int(row[0]) for row in cursor.fetchall()]
+    
+    cursor.close()
+    
+    return simple_entities + complex_entities
 
 def load_all_cache(conn: sqlite3.Connection) -> None:
     print('[*] Loaded data cache')
@@ -204,7 +272,15 @@ def load_all_cache(conn: sqlite3.Connection) -> None:
         entity_id = int(row[0])
         if entity_id not in arg_cache:
             arg_cache[entity_id] = []
-        arg_cache[entity_id].append(parse_arg_value_with_traversal(None, row[1], row[2].strip(), row[3].strip() if row[3] is not None else None))
+        value_type = str(row[2]).strip()
+        value_text = str(row[3]).strip() if row[3] is not None else None
+        arg_cache[entity_id].append(parse_arg_value_with_traversal(None, int(row[1]), value_type, value_text))
+        
+        if value_type.lower() == 'reference':
+            ref_id = int(value_text)
+            if ref_id not in parent_ref_cache:
+                parent_ref_cache[ref_id] = []
+            parent_ref_cache[ref_id].append(entity_id)
         i+=1
 
     print(f'[*] Loaded {i} step_arguments into memory cache')

@@ -1,26 +1,32 @@
-from .helpers import get_arguments, clean_display
+from .helpers import get_arguments, clean_display, ChildTypeRegister
 from .closed_shell import ClosedShell
-from .transient import Transient
+from . import solid_model
 
-class ManifoldSolidBrep(Transient):
-    type_name = 'MANIFOLD_SOLID_BREP'
+type_name = 'MANIFOLD_SOLID_BREP'
+class ManifoldSolidBrep(solid_model.SolidModel):
+    type_name = type_name
 
-    def __init__(self, conn, key: int):
-        super().__init__(conn, key)
+    def __init__(self, conn, key: int, resolve_children: bool = False):
+        super().__init__(conn, key, resolve_children)
         self.__get_arguments(conn)
 
     def __str__(self):
-        return f'''{self.type_name} (
+        return f'''{type_name} (
 {self._str_args()}
 )
 '''
 
     def _str_args(self):
         return f'''{super()._str_args()}
-    name         = {self.name}
-    outer        = {clean_display(self.outer)}'''
+    outer        =  {clean_display(self.outer) if self.resolve_children else self.outer}'''
     
     def __get_arguments(self, conn):
         args = get_arguments(conn, self.key)
-        self.name = args[0]
-        self.outer = ClosedShell(conn, args[1])
+        
+        if self.resolve_children:
+            self.outer = ClosedShell(conn, args[1])
+        else:
+            self.outer = args[1]
+
+child_type_register = ChildTypeRegister(type_name, solid_model.child_type_register)
+child_type_register.register(type_name, lambda conn, key: ManifoldSolidBrep(conn, key))

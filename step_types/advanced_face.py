@@ -1,10 +1,11 @@
 from .helpers import get_arguments, clean_display, clean_display_list
 from .face_bound import FaceBound
 from .abstract_types.surface import parse_surface
-from .transient import Transient
+from .transient import Transient, child_type_register
 
+type_name = 'ADVANCED_FACE'
 class AdvancedFace(Transient):
-    type_name = 'ADVANCED_FACE'
+    type_name = type_name
 
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
@@ -35,3 +36,5 @@ class AdvancedFace(Transient):
             'bounds': [b.get_geometry() for b in self.bounds],
             'surface': self.geometry.get_geometry()
         }
+    
+child_type_register.register(type_name, lambda conn, key: AdvancedFace(conn, key))

@@ -1,8 +1,10 @@
-from .helpers import get_complex_or_base_arguments
-from .geometric_representation_item import GeometricRepresentationItem
+from .helpers import get_complex_or_base_arguments, ChildTypeRegister
+from . import geometric_representation_item
 
-class Curve(GeometricRepresentationItem):
-    type_name = 'CURVE'
+type_name = 'CURVE'
+
+class Curve(geometric_representation_item.GeometricRepresentationItem):
+    type_name = type_name
 
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
@@ -25,3 +27,7 @@ class Curve(GeometricRepresentationItem):
                                               'GEOMETRIC_REPRESENTATION_ITEM',
                                               'CURVE'])
         pass
+
+    
+child_type_register = ChildTypeRegister(type_name, geometric_representation_item.child_type_register)
+child_type_register.register(type_name, lambda conn, key: Curve(conn, key))

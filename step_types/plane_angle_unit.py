@@ -1,7 +1,7 @@
 from .helpers import get_complex_or_base_arguments
-from .si_unit import SIUnit
+from . import si_unit
 
-class PlaneAngleUnit(SIUnit):
+class PlaneAngleUnit(si_unit.SIUnit):
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
         self.__get_arguments(conn)
@@ -24,3 +24,5 @@ class PlaneAngleUnit(SIUnit):
                                               'PLANE_ANGLE_UNIT'])
         # No extra params
         pass
+
+si_unit.child_type_register.register('PLANE_ANGLE_UNIT', lambda conn, key: PlaneAngleUnit(conn, key))

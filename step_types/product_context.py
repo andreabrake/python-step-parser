@@ -1,28 +1,25 @@
-from .helpers import get_arguments, clean_display
-from .application_context import ApplicationContext
+from .helpers import get_arguments, ChildTypeRegister
+from . import application_context_element
 
-class ProductContext():
+type_name = 'PRODUCT_CONTEXT'
+class ProductContext(application_context_element.ApplicationContextElement):
     def __init__(self, conn, key: int):
-        self.key = key
+        super().__init__(conn, key)
         self.__get_arguments(conn)
-        pass
 
     def __str__(self):
-        return f'''PRODUCT_CONTEXT (
-    key          = {self.key}
-    name         = {self.name}
-    discipline   = {self.discipline_type}
-    app_context  = {clean_display(self.application_context)}
+        return f'''{type_name} (
+{self._str_args()}
 )
 '''
     
+    def _str_args(self):
+        return f'''{super()._str_args()}
+    discipline   = {self.discipline}'''
+    
     def __get_arguments(self, conn):
         args = get_arguments(conn, self.key)
-        self.name = args[0]
-        self.frame_of_reference = args[1]
-        self.discipline_type = args[2]
+        self.discipline = args[2]
 
-        self.application_context = self.__get_application_context(conn)
-
-    def __get_application_context(self, conn):
-        return ApplicationContext(conn, self.frame_of_reference)
+child_type_register = ChildTypeRegister(type_name, application_context_element.child_type_register)
+child_type_register.register(type_name, lambda conn, key: ProductContext(conn, key))

@@ -1,14 +1,15 @@
-from .helpers import get_arguments, clean_display, clean_display_list
-from .abstract_types import unit
-from .transient import Transient
+from .helpers import get_arguments, clean_display, ChildTypeRegister
+from .abstract_types import unit_register
+from . import transient
 
-class MeasureWithUnit(Transient):
+type_name = 'MEASURE_WITH_UNIT'
+class MeasureWithUnit(transient.Transient):
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
         self.__get_arguments(conn)
 
     def __str__(self):
-        return f'''MEASURE_WITH_UNIT (
+        return f'''type_name (
 {self._str_args()}
 )
 '''
@@ -22,4 +23,8 @@ class MeasureWithUnit(Transient):
         args = get_arguments(conn, self.key)
         
         self.value = args[0]
-        self.unit = unit.parse(conn, args[1])
+        self.unit = unit_register.parse(conn, args[1])
+
+
+child_type_register = ChildTypeRegister(type_name, transient.child_type_register)
+child_type_register.register(type_name, lambda conn, key: MeasureWithUnit(conn, key))

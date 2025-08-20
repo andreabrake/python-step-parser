@@ -1,7 +1,7 @@
 from .helpers import get_complex_or_base_arguments
-from .si_unit import SIUnit
+from . import si_unit
 
-class LengthUnit(SIUnit):
+class LengthUnit(si_unit.SIUnit):
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
         self.__get_arguments(conn)
@@ -23,3 +23,5 @@ class LengthUnit(SIUnit):
                                               'LENGTH_UNIT'])
         # No extra params
         pass
+
+si_unit.child_type_register.register('LENGTH_UNIT', lambda conn, key: LengthUnit(conn, key))

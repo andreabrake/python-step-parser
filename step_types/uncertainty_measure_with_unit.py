@@ -1,14 +1,14 @@
-from .helpers import get_arguments, clean_display, clean_display_list
-from .abstract_types import representation_item, context
-from .measure_with_unit import MeasureWithUnit
+from .helpers import get_arguments
+from . import measure_with_unit
 
-class UncertaintyMeasureWithUnit(MeasureWithUnit):
+type_name = 'UNCERTAINTY_MEASURE_WITH_UNIT'
+class UncertaintyMeasureWithUnit(measure_with_unit.MeasureWithUnit):
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
         self.__get_arguments(conn)
 
     def __str__(self):
-        return f'''UNCERTAINTY_MEASURE_WITH_UNIT (
+        return f'''{type_name} (
 {self._str_args()}
 )
 '''
@@ -23,3 +23,6 @@ class UncertaintyMeasureWithUnit(MeasureWithUnit):
         
         self.name = args[3]
         self.description = args[3]
+
+
+measure_with_unit.child_type_register.register(type_name, lambda conn, key: UncertaintyMeasureWithUnit(conn, key))

@@ -1,24 +1,26 @@
-from .helpers import get_arguments, clean_display_list, clean_display
-from .styled_item import StyledItem
-from .geometric_representation_context import GeometricRepresentationContext
+from .helpers import get_complex_or_base_arguments, ChildTypeRegister
+from . import presentation_representation
 
-class MechanicalDesignGeometricPresentationRepresentation():
+type_name = 'MECHANICAL_DESIGN_GEOMETRIC_PRESENTATION_REPRESENTATION'
+
+class MechanicalDesignGeometricPresentationRepresentation(presentation_representation.PresentationRepresentation):
+    type_name = type_name
+
     def __init__(self, conn, key: int):
-        self.key = key
+        super().__init__(conn, key)
         self.__get_arguments(conn)
-        pass
 
     def __str__(self):
-        return f'''MECHANICAL_DESIGN_GEOMETRIC_PRESENTATION_REPRESENTATION (
-    key          = {self.key}
-    name         = {self.name}
-    styled_items = {clean_display_list(self.styled_items)}
-    context      = {clean_display(self.context)}
+        return f'''{self.type_name} (
+{self._str_args()}
 )
 '''
     
+    def _str_args(self):
+        return f'''{super()._str_args()}'''
+    
     def __get_arguments(self, conn):
-        args = get_arguments(conn, self.key)
-        self.name = args[0]
-        self.styled_items = [StyledItem(conn, e) for e in args[1]]
-        self.context = GeometricRepresentationContext(conn, args[2])
+        pass
+
+
+presentation_representation.child_type_register.register(type_name, lambda conn, key: MechanicalDesignGeometricPresentationRepresentation(conn, key))

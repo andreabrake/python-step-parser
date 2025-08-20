@@ -1,9 +1,8 @@
-from .helpers import get_complex_or_base_arguments, clean_display_list
-from .b_spline_curve import BSPlineCurve
+from .helpers import get_complex_or_base_arguments, ChildTypeRegister
+from . import b_spline_curve
 
-class BSplineCurveWithKnots(BSPlineCurve):
-    type_name = 'B_SPLINE_CURVE_WITH_KNOTS'
-
+type_name = 'B_SPLINE_CURVE_WITH_KNOTS'
+class BSplineCurveWithKnots(b_spline_curve.BSPlineCurve):
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
         self.__get_arguments(conn)
@@ -38,6 +37,10 @@ class BSplineCurveWithKnots(BSPlineCurve):
         return super().get_geometry() | {
             'type': self.type_name,
             'knot_mult': [int(v) for v in self.knot_multiplicities],
-            'pts': [float(v) for v in self.knots],
+            'knots': [float(v) for v in self.knots],
             'spec': self.knot_spec
         }
+    
+    
+child_type_register = ChildTypeRegister(type_name, b_spline_curve.child_type_register)
+child_type_register.register(type_name, lambda conn, key: BSplineCurveWithKnots(conn, key))

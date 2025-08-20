@@ -5,9 +5,16 @@ def split_arguments(arg_string: str) -> List[str]:
     """Splits arguments while handling parentheses (nested lists)."""
     args = []
     depth = 0
+    escaped = None 
     current = ''
     for char in arg_string:
-        if char == ',' and depth == 0:
+        if escaped is None and char == "'":
+            escaped = char
+            current += char
+        elif escaped == char:
+            escaped = None
+            current += char
+        elif escaped is None and char == ',' and depth == 0:
             args.append(current.strip())
             current = ''
         else:

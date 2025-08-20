@@ -1,7 +1,8 @@
-from .helpers import get_complex_or_base_arguments
-from .named_unit import NamedUnit
+from .helpers import get_complex_or_base_arguments, ChildTypeRegister
+from . import named_unit
 
-class SIUnit(NamedUnit):
+type_name = 'SI_UNIT'
+class SIUnit(named_unit.NamedUnit):
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
         self.__get_arguments(conn)
@@ -25,3 +26,6 @@ class SIUnit(NamedUnit):
         
         self.prefix = args[1]
         self.name = args[2]
+
+child_type_register = ChildTypeRegister(type_name, named_unit.child_type_register)
+child_type_register.register(type_name, lambda conn, key: SIUnit(conn, key))

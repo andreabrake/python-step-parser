@@ -1,5 +1,5 @@
 from .helpers import get_complex_or_base_arguments, clean_display, clean_display_list
-from .abstract_types import representation_item
+from . import representation_item
 from .transient import Transient
 from .item_defined_transformation import ItemDefinedTransformation
 
@@ -34,8 +34,8 @@ class ShapeRepresentationRelationship(Transient):
         
         self.name = args[0]
         self.description = args[1]
-        self.shape_representation_1 = representation_item.parse(conn, args[2])
-        self.shape_representation_2 = representation_item.parse(conn, args[3])
+        self.shape_representation_1 = representation_item.child_type_register.parse(conn, args[2])
+        self.shape_representation_2 = representation_item.child_type_register.parse(conn, args[3])
         if len(args) > 4:
             self.transformation = ItemDefinedTransformation(conn, args[4])
         else:

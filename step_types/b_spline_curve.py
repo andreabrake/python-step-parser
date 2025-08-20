@@ -1,10 +1,10 @@
-from .helpers import get_complex_or_base_arguments, clean_display_list
-from .bounded_curve import BoundedCurve
+from .helpers import get_complex_or_base_arguments, clean_display_list, ChildTypeRegister
+from . import bounded_curve
 from .cartesian_point import CartesianPoint
 
-class BSPlineCurve(BoundedCurve):
-    type_name = 'B_SPLINE_CURVE'
+type_name = 'B_SPLINE_CURVE'
 
+class BSPlineCurve(bounded_curve.BoundedCurve):
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
         self.__get_arguments(conn)
@@ -42,8 +42,11 @@ class BSPlineCurve(BoundedCurve):
         return super().get_geometry() | {
             'type': self.type_name,
             'deg': self.degree,
-            'pts': [p.get_geometry() for p in self.control_points_list],
+            'ctrl': [p.get_geometry() for p in self.control_points_list],
             'form': self.curve_form,
             'is_closed': self.closed_curve,
             'is_self_insersect': self.self_intersect
         }
+    
+child_type_register = ChildTypeRegister(type_name, bounded_curve.child_type_register)
+child_type_register.register(type_name, lambda conn, key: BSPlineCurve(conn, key))

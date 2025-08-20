@@ -1,13 +1,15 @@
-from .helpers import get_complex_or_base_arguments
-from .transient import Transient
+from .helpers import get_complex_or_base_arguments, ChildTypeRegister
+from . import transient
 
-class RepresentationContext(Transient):
+type_name = 'REPRESENTATION_CONTEXT'
+class RepresentationContext(transient.Transient):
+    type_name = type_name
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
         self.__get_arguments(conn)
 
     def __str__(self):
-        return f'''REPRESENTATION_CONTEXT (
+        return f'''{type_name} (
 {self._str_args()}
 )
 '''
@@ -24,3 +26,6 @@ class RepresentationContext(Transient):
         
         self.context_identifier = args[0]
         self.context_type = args[1]
+
+child_type_register = ChildTypeRegister(type_name, transient.child_type_register)
+child_type_register.register(type_name, lambda conn, key: RepresentationContext(conn, key))

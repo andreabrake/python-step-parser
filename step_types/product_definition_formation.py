@@ -1,14 +1,15 @@
-from .helpers import get_arguments, clean_display, clean_display_list
-from .transient import Transient 
-from .product import Product
+from .helpers import get_arguments, clean_display, ChildTypeRegister
+from . import transient
+from . import product
 
-class ProductDefinitionFormation(Transient):
+type_name: str = 'PRODUCT_DEFINITION_FORMATION'
+class ProductDefinitionFormation(transient.Transient):
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
         self.__get_arguments(conn)
 
     def __str__(self):
-        return f'''PRODUCT_DEFINITION_FORMATION (
+        return f'''{type_name} (
 {self._str_args()}
 )
 '''
@@ -24,4 +25,7 @@ class ProductDefinitionFormation(Transient):
         
         self.id = args[0]
         self.description = args[1]
-        self.product = Product(conn, args[2])
+        self.product = product.child_type_register.parse(conn, args[2])
+
+child_type_register = ChildTypeRegister(type_name, transient.child_type_register)
+child_type_register.register(type_name, lambda conn, key: ProductDefinitionFormation(conn, key))

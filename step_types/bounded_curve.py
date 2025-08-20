@@ -1,15 +1,15 @@
-from .helpers import get_complex_or_base_arguments
-from .curve import Curve
+from .helpers import get_complex_or_base_arguments, ChildTypeRegister
+from . import curve
 
-class BoundedCurve(Curve):
-    type_name = 'BOUNDED_CURVE'
+type_name = 'BOUNDED_CURVE'
 
+class BoundedCurve(curve.Curve):
     def __init__(self, conn, key: int):
         super().__init__(conn, key)
         self.__get_arguments(conn)
 
     def __str__(self):
-        return f'''{self.type_name} (
+        return f'''{type_name} (
 {self._str_args()}
 )
 '''
@@ -30,3 +30,6 @@ class BoundedCurve(Curve):
         return {
             'type': 'BOUNDED_CURVE'
         }
+    
+child_type_register = ChildTypeRegister(type_name, curve.child_type_register)
+child_type_register.register(type_name, lambda conn, key: BoundedCurve(conn, key))

@@ -2,7 +2,7 @@ from .helpers import get_complex_or_base_arguments, clean_display, clean_display
 from .cartesian_point import CartesianPoint
 from .b_spline_curve_with_knots import BSplineCurveWithKnots
 
-class BSplineCurveWithKnots(BSplineCurveWithKnots):
+class RationalBSplineCurveWithKnots(BSplineCurveWithKnots):
     type_name = 'RATIONAL_B_SPLINE_CURVE_WITH_KNOTS'
 
     def __init__(self, conn, key: int):
