@@ -5,7 +5,7 @@ from ..step_parser import StepParser
 type_name = 'SHAPE_REPRESENTATION'
 class ShapeRepresentation(representation.Representation):
     type_name = type_name
-    def __init__(self, conn, key: int, resolve_children: bool = False):
+    def __init__(self, parser: StepParser, key: int, resolve_children: bool = False):
         super().__init__(parser, key, resolve_children)
         self.__get_arguments(parser)
 

@@ -8,7 +8,7 @@ type_name = 'SOLID_MODEL'
 class SolidModel(geometric_representation_item.GeometricRepresentationItem):
     type_name = type_name
 
-    def __init__(self, conn, key: int, resolve_children: bool = False):
+    def __init__(self, parser: StepParser, key: int, resolve_children: bool = False):
         super().__init__(parser, key, resolve_children)
         self.__get_arguments(parser)
 
