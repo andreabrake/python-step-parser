@@ -1,11 +1,12 @@
 from .helpers import get_arguments, clean_display, clean_display_list
 from .abstract_types import color
 from .surfacer_style_transparent import SurfaceStyleTransparent
+from ..step_parser import StepParser
 
 class SurfaceStyleRenderingWithProperties():
-    def __init__(self, conn, key: int):
+    def __init__(self, parser: StepParser, key: int):
         self.key = key
-        self.__get_arguments(conn)
+        self.__get_arguments(parser)
         pass
 
     def __str__(self):
@@ -17,8 +18,8 @@ class SurfaceStyleRenderingWithProperties():
 )
 '''
     
-    def __get_arguments(self, conn):
-        args = get_arguments(conn, self.key)
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_arguments(self.key)
         self.method = args[0]
-        self.colour = color.parse(conn, args[1])
-        self.transparency = [SurfaceStyleTransparent(conn, arg) for arg in args[2]]
+        self.colour = color.parse(parser, args[1])
+        self.transparency = [SurfaceStyleTransparent(parser, arg) for arg in args[2]]

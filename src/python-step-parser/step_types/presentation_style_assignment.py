@@ -1,10 +1,11 @@
 from .helpers import get_arguments, clean_display_list
 from .surface_style_usage import SurfaceStyleUsage
+from ..step_parser import StepParser
 
 class PresentationStyleAssignment():
-    def __init__(self, conn, key: int):
+    def __init__(self, parser: StepParser, key: int):
         self.key = key
-        self.__get_arguments(conn)
+        self.__get_arguments(parser)
         pass
 
     def __str__(self):
@@ -14,6 +15,6 @@ class PresentationStyleAssignment():
 )
 '''
     
-    def __get_arguments(self, conn):
-        args = get_arguments(conn, self.key)
-        self.styles = [SurfaceStyleUsage(conn, e) for e in args[0]]
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_arguments(self.key)
+        self.styles = [SurfaceStyleUsage(parser, e) for e in args[0]]

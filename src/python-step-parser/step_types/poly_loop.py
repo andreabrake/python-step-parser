@@ -1,13 +1,14 @@
 from .helpers import get_arguments, clean_display_list
 from .cartesian_point import CartesianPoint
 from .loop import Loop
+from ..step_parser import StepParser
 
 class PolyLoop(Loop):
     type_name = 'POLY_LOOP'
 
-    def __init__(self, conn, key: int):
-        super().__init__(conn, key)
-        self.__get_arguments(conn)
+    def __init__(self, parser: StepParser, key: int):
+        super().__init__(parser, key)
+        self.__get_arguments(parser)
 
     def __str__(self):
         return f'''{self.type_name} (
@@ -19,6 +20,6 @@ class PolyLoop(Loop):
         return f'''{super()._str_args()}
     polygon      = {clean_display_list(self.polygon)}'''
 
-    def __get_arguments(self, conn):
-        args = get_arguments(conn, self.key)
-        self.polygon = [CartesianPoint(conn, p) for p in args[1]]
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_arguments(self.key)
+        self.polygon = [CartesianPoint(parser, p) for p in args[1]]

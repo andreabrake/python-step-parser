@@ -1,12 +1,13 @@
 from .helpers import get_arguments, clean_display
 from .surface import Surface
+from ..step_parser import StepParser
 
 class BoundedSurface(Surface):
     type_name = 'BOUNDED_SURFACE'
 
-    def __init__(self, conn, key: int):
-        super().__init__(conn, key)
-        self.__get_arguments(conn)
+    def __init__(self, parser: StepParser, key: int):
+        super().__init__(parser, key)
+        self.__get_arguments(parser)
 
     def __str__(self):
         return f'''{self.type_name} (
@@ -17,7 +18,7 @@ class BoundedSurface(Surface):
     def _str_args(self):
         return f'''{super()._str_args()}'''
     
-    def __get_arguments(self, conn):
+    def __get_arguments(self, parser: StepParser):
         pass
 
     def get_geometry(self):

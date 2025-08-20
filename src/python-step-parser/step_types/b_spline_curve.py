@@ -1,13 +1,14 @@
 from .helpers import get_complex_or_base_arguments, clean_display_list, ChildTypeRegister
 from . import bounded_curve
 from .cartesian_point import CartesianPoint
+from ..step_parser import StepParser
 
 type_name = 'B_SPLINE_CURVE'
 
 class BSPlineCurve(bounded_curve.BoundedCurve):
-    def __init__(self, conn, key: int):
-        super().__init__(conn, key)
-        self.__get_arguments(conn)
+    def __init__(self, parser: StepParser, key: int):
+        super().__init__(parser, key)
+        self.__get_arguments(parser)
 
     def __str__(self):
         return f'''{self.type_name} (
@@ -23,17 +24,16 @@ class BSPlineCurve(bounded_curve.BoundedCurve):
     closed_curve = {self.closed_curve}
     self_insect  = {self.self_intersect}'''
     
-    def __get_arguments(self, conn):
-        args = get_complex_or_base_arguments(conn,
-                                             self.key,
-                                             ['REPRESENTATION_ITEM',
-                                              'GEOMETRIC_REPRESENTATION_ITEM',
-                                              'CURVE',
-                                              'BOUNDED_CURVE',
-                                              'B_SPLINE_CURVE'])
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_complex_or_base_arguments(self.key,
+                                                    ['REPRESENTATION_ITEM',
+                                                     'GEOMETRIC_REPRESENTATION_ITEM',
+                                                     'CURVE',
+                                                     'BOUNDED_CURVE',
+                                                     'B_SPLINE_CURVE'])
         
         self.degree = args[1]
-        self.control_points_list = [CartesianPoint(conn, p) for p in args[2]]
+        self.control_points_list = [CartesianPoint(parser, p) for p in args[2]]
         self.curve_form = args[3]
         self.closed_curve = args[4]
         self.self_intersect = args[5]
@@ -49,4 +49,4 @@ class BSPlineCurve(bounded_curve.BoundedCurve):
         }
     
 child_type_register = ChildTypeRegister(type_name, bounded_curve.child_type_register)
-child_type_register.register(type_name, lambda conn, key: BSPlineCurve(conn, key))
+child_type_register.register(type_name, lambda parser, key: BSPlineCurve(parser, key))

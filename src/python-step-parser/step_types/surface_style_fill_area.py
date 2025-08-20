@@ -1,10 +1,11 @@
 from .helpers import get_arguments, clean_display
 from .fill_area_style import FillAreaStyle
+from ..step_parser import StepParser
 
 class SurfaceStyleFillArea():
-    def __init__(self, conn, key: int):
+    def __init__(self, parser: StepParser, key: int):
         self.key = key
-        self.__get_arguments(conn)
+        self.__get_arguments(parser)
         pass
 
     def __str__(self):
@@ -14,6 +15,6 @@ class SurfaceStyleFillArea():
 )
 '''
     
-    def __get_arguments(self, conn):
-        args = get_arguments(conn, self.key)
-        self.fill_area = FillAreaStyle(conn, args[0])
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_arguments(self.key)
+        self.fill_area = FillAreaStyle(parser, args[0])

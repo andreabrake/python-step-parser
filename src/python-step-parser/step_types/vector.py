@@ -1,13 +1,14 @@
 from .helpers import get_arguments, clean_display
 from .direction import Direction
 from .geometric_representation_item import GeometricRepresentationItem
+from ..step_parser import StepParser
 
 class Vector(GeometricRepresentationItem):
     type_name = 'VECTOR'
 
-    def __init__(self, conn, key: int):
-        super().__init__(conn, key)
-        self.__get_arguments(conn)
+    def __init__(self, parser: StepParser, key: int):
+        super().__init__(parser, key)
+        self.__get_arguments(parser)
 
     def __str__(self):
         return f'''{self.type_name} (
@@ -20,9 +21,9 @@ class Vector(GeometricRepresentationItem):
     orientation  = {clean_display(self.orientation)}
     magnitude    = {self.magnitude}'''
     
-    def __get_arguments(self, conn):
-        args = get_arguments(conn, self.key)
-        self.orientation = Direction(conn, args[1])
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_arguments(self.key)
+        self.orientation = Direction(parser, args[1])
         self.magnitude = args[2]
 
     def get_geometry(self):

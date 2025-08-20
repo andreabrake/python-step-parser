@@ -6,14 +6,14 @@ from ..poly_loop import PolyLoop
 from ..loop import Loop
 
 
-def parse(conn, id: int) -> Loop:
-    type = get_entity_type(conn, id)
+def parse(parser, id: int) -> Loop:
+    type = get_entity_type(parser, id)
     # print('parsing loop', type)
     if type == 'EDGE_LOOP':
-        return EdgeLoop(conn, id)
+        return EdgeLoop(parser, id)
     elif type == 'VERTEX_LOOP':
-        return VertexLoop(conn, id)
+        return VertexLoop(parser, id)
     elif type == 'POLY_LOOP':
-        return PolyLoop(conn, id)
+        return PolyLoop(parser, id)
     raise Exception(f'Cannot find context with type {type}')
 

@@ -1,9 +1,10 @@
 from .helpers import get_entity_type, ChildTypeRegister
+from ..step_parser import StepParser
 
 class Transient():
     type_name: str = 'TRANSIENT'
 
-    def __init__(self, conn, key: int, resolve_children: bool = True):
+    def __init__(self, parser: StepParser, key: int, resolve_children: bool = True):
         self.key = key
         self.resolve_children = resolve_children
 
@@ -15,7 +16,7 @@ class Transient():
     def _str_args(self):
         return f'''    key          = {self.key}'''
     
-    def __get_arguments(self, conn):
+    def __get_arguments(self, parser: StepParser):
         pass
     
     def get_geometry(self):

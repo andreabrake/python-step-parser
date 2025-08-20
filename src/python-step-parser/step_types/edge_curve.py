@@ -2,13 +2,14 @@ from .helpers import  get_arguments, clean_display
 from .vertex_point import VertexPoint
 from .edge import Edge
 from .abstract_types.curve import parse_curve
+from ..step_parser import StepParser
 
 class EdgeCurve(Edge):
     type_name = 'EDGE_CURVE'
 
-    def __init__(self, conn, key: int):
-        super().__init__(conn, key)
-        self.__get_arguments(conn)
+    def __init__(self, parser: StepParser, key: int):
+        super().__init__(parser, key)
+        self.__get_arguments(parser)
 
     def __str__(self):
         return f'''{self.type_name} (
@@ -23,11 +24,11 @@ class EdgeCurve(Edge):
     geometry     = {clean_display(self.geometry)}
     same_sense   = {self.same_sense}'''
     
-    def __get_arguments(self, conn):
-        args = get_arguments(conn, self.key)
-        self.start = VertexPoint(conn, args[1])
-        self.end = VertexPoint(conn, args[2])
-        self.geometry = parse_curve(conn, args[3])
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_arguments(self.key)
+        self.start = VertexPoint(parser, args[1])
+        self.end = VertexPoint(parser, args[2])
+        self.geometry = parse_curve(parser, args[3])
         self.same_sense = args[4]
 
     def get_geometry(self):

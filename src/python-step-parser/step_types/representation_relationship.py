@@ -1,9 +1,10 @@
 from .helpers import get_complex_or_base_arguments
+from ..step_parser import StepParser
 
 class RepresentationRelationship():
-    def __init__(self, conn, key: int):
+    def __init__(self, parser: StepParser, key: int):
         self.key = key
-        self.__get_arguments(conn)
+        self.__get_arguments(parser)
         pass
 
     def __str__(self):
@@ -16,8 +17,8 @@ class RepresentationRelationship():
 )
 '''
     
-    def __get_arguments(self, conn):
-        args = get_complex_or_base_arguments(conn,
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_complex_or_base_arguments(
                                              self.key,
                                              ['REPRESENTATION_RELATIONSHIP'])
         

@@ -1,13 +1,14 @@
 from .helpers import get_arguments, clean_display_doublelist
 from .bounded_surface import BoundedSurface
 from .cartesian_point import CartesianPoint
+from ..step_parser import StepParser
 
 class BSPlineSurface(BoundedSurface):
     type_name = 'B_SPLINE_SURFACE'
 
-    def __init__(self, conn, key: int):
-        super().__init__(conn, key)
-        self.__get_arguments(conn)
+    def __init__(self, parser: StepParser, key: int):
+        super().__init__(parser, key)
+        self.__get_arguments(parser)
 
     def __str__(self):
         return f'''{self.type_name} (
@@ -25,12 +26,12 @@ class BSPlineSurface(BoundedSurface):
     vclosed      = {self.vclosed}
     self_insect  = {self.self_intersect}'''
     
-    def __get_arguments(self, conn):
-        args = get_arguments(conn, self.key)
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_arguments(self.key)
 
         self.udegree = args[1]
         self.vdegree = args[2]
-        self.control_points_list = [[CartesianPoint(conn, p) for p in ps] for ps in args[3]]
+        self.control_points_list = [[CartesianPoint(parser, p) for p in ps] for ps in args[3]]
         self.surface_form = args[4]
         self.uclosed = args[5]
         self.vclosed = args[6]

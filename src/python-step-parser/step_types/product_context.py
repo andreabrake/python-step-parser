@@ -1,11 +1,12 @@
 from .helpers import get_arguments, ChildTypeRegister
 from . import application_context_element
+from ..step_parser import StepParser
 
 type_name = 'PRODUCT_CONTEXT'
 class ProductContext(application_context_element.ApplicationContextElement):
-    def __init__(self, conn, key: int):
-        super().__init__(conn, key)
-        self.__get_arguments(conn)
+    def __init__(self, parser: StepParser, key: int):
+        super().__init__(parser, key)
+        self.__get_arguments(parser)
 
     def __str__(self):
         return f'''{type_name} (
@@ -17,9 +18,9 @@ class ProductContext(application_context_element.ApplicationContextElement):
         return f'''{super()._str_args()}
     discipline   = {self.discipline}'''
     
-    def __get_arguments(self, conn):
-        args = get_arguments(conn, self.key)
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_arguments(self.key)
         self.discipline = args[2]
 
 child_type_register = ChildTypeRegister(type_name, application_context_element.child_type_register)
-child_type_register.register(type_name, lambda conn, key: ProductContext(conn, key))
+child_type_register.register(type_name, lambda parser, key: ProductContext(parser, key))

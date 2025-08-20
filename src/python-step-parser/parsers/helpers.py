@@ -1,5 +1,6 @@
-from typing import List, Union, Tuple
+from typing import List, Union, Tuple, Dict, Any
 import re
+from .complex_item_dto import ComplexItemDTO
 
 def split_arguments(arg_string: str) -> List[str]:
     """Splits arguments while handling parentheses (nested lists)."""
@@ -42,3 +43,21 @@ def classify_arg(arg: str) -> Tuple[str, Union[str, None]]:
         return 'number', arg
     return 'string', arg.strip("'")  # fallback
 
+def parse_arg_value(value_type: str, value_text: str) -> Any:
+    if value_type == 'list':
+        return [int(v[1:]) if v[0] == '#' else v
+                for v
+                in [v.strip()
+                    for v
+                    in value_text[1:len(value_text)-1].split(',')]]
+    if value_type == 'reference':
+        return int(value_text)
+    if value_type == 'number':
+        return float(value_text)
+    return value_text
+
+def get_complex_args(args: List[str], types: List[ComplexItemDTO], type_name: str) -> List[str]:
+    ci = next((t for t in types if t.type == type_name), None)
+    if ci is None:
+        return []
+    return args[ci.arg_offset:(ci.arg_offset + ci.n_args)]

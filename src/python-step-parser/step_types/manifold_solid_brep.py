@@ -1,14 +1,15 @@
 from .helpers import get_arguments, clean_display, ChildTypeRegister
 from .closed_shell import ClosedShell
 from . import solid_model
+from ..step_parser import StepParser
 
 type_name = 'MANIFOLD_SOLID_BREP'
 class ManifoldSolidBrep(solid_model.SolidModel):
     type_name = type_name
 
-    def __init__(self, conn, key: int, resolve_children: bool = False):
-        super().__init__(conn, key, resolve_children)
-        self.__get_arguments(conn)
+    def __init__(self, parser: StepParser, key: int, resolve_children: bool = False):
+        super().__init__(parser, key, resolve_children)
+        self.__get_arguments(parser)
 
     def __str__(self):
         return f'''{type_name} (
@@ -20,13 +21,13 @@ class ManifoldSolidBrep(solid_model.SolidModel):
         return f'''{super()._str_args()}
     outer        =  {clean_display(self.outer) if self.resolve_children else self.outer}'''
     
-    def __get_arguments(self, conn):
-        args = get_arguments(conn, self.key)
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_arguments(self.key)
         
         if self.resolve_children:
-            self.outer = ClosedShell(conn, args[1])
+            self.outer = ClosedShell(parser, args[1])
         else:
             self.outer = args[1]
 
 child_type_register = ChildTypeRegister(type_name, solid_model.child_type_register)
-child_type_register.register(type_name, lambda conn, key: ManifoldSolidBrep(conn, key))
+child_type_register.register(type_name, lambda parser, key: ManifoldSolidBrep(parser, key))

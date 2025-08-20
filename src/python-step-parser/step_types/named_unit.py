@@ -1,12 +1,13 @@
 from .helpers import get_complex_or_base_arguments, ChildTypeRegister
 from . import transient
 from .abstract_types import unit_register
+from ..step_parser import StepParser
 
 type_name = 'NAMED_UNIT'
 class NamedUnit(transient.Transient):
-    def __init__(self, conn, key: int):
-        super().__init__(conn, key)
-        self.__get_arguments(conn)
+    def __init__(self, parser: StepParser, key: int):
+        super().__init__(parser, key)
+        self.__get_arguments(parser)
 
     def __str__(self):
         return f'''{type_name} (
@@ -18,8 +19,8 @@ class NamedUnit(transient.Transient):
         return f'''{super()._str_args()}
     dimensions   = {self.dimensions}'''
 
-    def __get_arguments(self, conn):
-        args = get_complex_or_base_arguments(conn,
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_complex_or_base_arguments(
                                              self.key,
                                              ['NAMED_UNIT',])
         
@@ -29,4 +30,4 @@ child_type_register = ChildTypeRegister(type_name, [
     transient.child_type_register,
     unit_register
 ])
-child_type_register.register(type_name, lambda conn, key: NamedUnit(conn, key))
+child_type_register.register(type_name, lambda parser, key: NamedUnit(parser, key))

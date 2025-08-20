@@ -1,13 +1,14 @@
 from .helpers import get_arguments, clean_display
 from .axis2_placement3d import Axis2Placement3d
 from .surface import Surface
+from ..step_parser import StepParser
 
 class ElementarySurface(Surface):
     type_name = 'ELEMENTARY_SURFACE'
 
-    def __init__(self, conn, key: int):
-        super().__init__(conn, key)
-        self.__get_arguments(conn)
+    def __init__(self, parser: StepParser, key: int):
+        super().__init__(parser, key)
+        self.__get_arguments(parser)
 
     def __str__(self):
         return f'''{self.type_name} (
@@ -19,9 +20,9 @@ class ElementarySurface(Surface):
         return f'''{super()._str_args()}
     position     = {clean_display(self.position)}'''
 
-    def __get_arguments(self, conn):
-        args = get_arguments(conn, self.key)
-        self.position = Axis2Placement3d(conn, args[1])
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_arguments(self.key)
+        self.position = Axis2Placement3d(parser, args[1])
 
     def get_geometry(self):
         return {

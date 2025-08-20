@@ -1,11 +1,12 @@
 from .helpers import get_arguments, clean_display_list
 from .surface_style_fill_area import SurfaceStyleFillArea
 from .abstract_types import surface_style
+from ..step_parser import StepParser
 
 class SurfaceSideStyle():
-    def __init__(self, conn, key: int):
+    def __init__(self, parser: StepParser, key: int):
         self.key = key
-        self.__get_arguments(conn)
+        self.__get_arguments(parser)
         pass
 
     def __str__(self):
@@ -16,7 +17,7 @@ class SurfaceSideStyle():
 )
 '''
     
-    def __get_arguments(self, conn):
-        args = get_arguments(conn, self.key)
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_arguments(self.key)
         self.side = args[0]
-        self.styles = [surface_style.parse(conn, e) for e in args[1]]
+        self.styles = [surface_style.parse(parser, e) for e in args[1]]

@@ -10,25 +10,25 @@ from ..b_spline_surface_with_knots import BSplineSurfaceWithKnots
 
 from ..surface import Surface
 
-def parse_surface(conn, id: int) -> Surface:
-    type = get_entity_type(conn, id)
+def parse_surface(parser, id: int) -> Surface:
+    type = get_entity_type(parser, id)
     # print('parsing surface', type)
     if type == 'CONICAL_SURFACE':
-        return ConicalSurface(conn, id)
+        return ConicalSurface(parser, id)
     elif type == 'CYLINDRICAL_SURFACE':
-        return CylindricalSurface(conn, id)
+        return CylindricalSurface(parser, id)
     elif type == 'DEGENERATE_TOROIDAL_SURFACE':
-        return DegenerateToroidalSurface(conn, id)
+        return DegenerateToroidalSurface(parser, id)
     elif type == 'SPHERICAL_SURFACE':
-        return SphericalSurface(conn, id)
+        return SphericalSurface(parser, id)
     elif type == 'TOROIDAL_SURFACE':
-        return ToroidalSurface(conn, id)
+        return ToroidalSurface(parser, id)
     elif type == 'PLANE':
-        return Plane(conn, id)
+        return Plane(parser, id)
     elif type == 'B_SPLINE_SURFACE_WITH_KNOTS':
-        return BSplineSurfaceWithKnots(conn, id)
+        return BSplineSurfaceWithKnots(parser, id)
     elif type == 'COMPLEX':
-        complex_items = get_complex_items(conn, id)
+        complex_items = get_complex_items(parser, id)
         complex_item_types = [i.type for i in complex_items]
         raise Exception(f'Cannot find context with type {type} [{','.join(complex_item_types)}]')
     raise Exception(f'Cannot find context with type {type}')

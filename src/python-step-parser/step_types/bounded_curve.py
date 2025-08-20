@@ -1,12 +1,13 @@
 from .helpers import get_complex_or_base_arguments, ChildTypeRegister
 from . import curve
+from ..step_parser import StepParser
 
 type_name = 'BOUNDED_CURVE'
 
 class BoundedCurve(curve.Curve):
-    def __init__(self, conn, key: int):
-        super().__init__(conn, key)
-        self.__get_arguments(conn)
+    def __init__(self, parser: StepParser, key: int):
+        super().__init__(parser, key)
+        self.__get_arguments(parser)
 
     def __str__(self):
         return f'''{type_name} (
@@ -17,8 +18,8 @@ class BoundedCurve(curve.Curve):
     def _str_args(self):
         return f'''{super()._str_args()}'''
     
-    def __get_arguments(self, conn):
-        args = get_complex_or_base_arguments(conn,
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_complex_or_base_arguments(
                                              self.key,
                                              ['REPRESENTATION_ITEM',
                                               'GEOMETRIC_REPRESENTATION_ITEM',
@@ -32,4 +33,4 @@ class BoundedCurve(curve.Curve):
         }
     
 child_type_register = ChildTypeRegister(type_name, curve.child_type_register)
-child_type_register.register(type_name, lambda conn, key: BoundedCurve(conn, key))
+child_type_register.register(type_name, lambda parser, key: BoundedCurve(parser, key))

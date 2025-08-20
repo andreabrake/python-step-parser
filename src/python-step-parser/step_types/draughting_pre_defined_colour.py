@@ -1,10 +1,11 @@
 from .helpers import get_arguments
 from .colour_rgb import ColourRGB
+from ..step_parser import StepParser
 
 class DraughtingPreDefinedColour():
-    def __init__(self, conn, key: int):
+    def __init__(self, parser: StepParser, key: int):
         self.key = key
-        self.__get_arguments(conn)
+        self.__get_arguments(parser)
         pass
 
     def __str__(self):
@@ -14,6 +15,6 @@ class DraughtingPreDefinedColour():
 )
 '''
     
-    def __get_arguments(self, conn):
-        args = get_arguments(conn, self.key)
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_arguments(self.key)
         self.name = args[0]

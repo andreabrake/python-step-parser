@@ -2,14 +2,14 @@ from .helpers import get_complex_or_base_arguments, clean_display, clean_display
 from . import representation_item
 from .transient import Transient
 from .item_defined_transformation import ItemDefinedTransformation
-
+from ..step_parser import StepParser
 
 class ShapeRepresentationRelationship(Transient):
     type_name = 'SHAPE_REPRESENTATION_RELATIONSHIP'
 
-    def __init__(self, conn, key: int):
-        super().__init__(conn, key)
-        self.__get_arguments(conn)
+    def __init__(self, parser: StepParser, key: int):
+        super().__init__(parser, key)
+        self.__get_arguments(parser)
 
     def __str__(self):
         return f'''SHAPE_REPRESENTATION_RELATIONSHIP (
@@ -25,8 +25,8 @@ class ShapeRepresentationRelationship(Transient):
     shape_rep_2  = {clean_display(self.shape_representation_2)}
     transform    = {clean_display(self.transformation)}'''
     
-    def __get_arguments(self, conn):
-        args = get_complex_or_base_arguments(conn,
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_complex_or_base_arguments(
                                              self.key,
                                              ['REPRESENTATION_RELATIONSHIP',
                                               'REPRESENTATION_RELATIONSHIP_WITH_TRANSFORMATION',
@@ -34,9 +34,9 @@ class ShapeRepresentationRelationship(Transient):
         
         self.name = args[0]
         self.description = args[1]
-        self.shape_representation_1 = representation_item.child_type_register.parse(conn, args[2])
-        self.shape_representation_2 = representation_item.child_type_register.parse(conn, args[3])
+        self.shape_representation_1 = representation_item.child_type_register.parse(parser, args[2])
+        self.shape_representation_2 = representation_item.child_type_register.parse(parser, args[3])
         if len(args) > 4:
-            self.transformation = ItemDefinedTransformation(conn, args[4])
+            self.transformation = ItemDefinedTransformation(parser, args[4])
         else:
             self.transformation = None

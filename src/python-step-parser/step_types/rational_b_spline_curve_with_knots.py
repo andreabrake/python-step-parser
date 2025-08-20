@@ -1,13 +1,14 @@
 from .helpers import get_complex_or_base_arguments, clean_display, clean_display_list
 from .cartesian_point import CartesianPoint
 from .b_spline_curve_with_knots import BSplineCurveWithKnots
+from ..step_parser import StepParser
 
 class RationalBSplineCurveWithKnots(BSplineCurveWithKnots):
     type_name = 'RATIONAL_B_SPLINE_CURVE_WITH_KNOTS'
 
-    def __init__(self, conn, key: int):
-        super().__init__(conn, key)
-        self.__get_arguments(conn)
+    def __init__(self, parser: StepParser, key: int):
+        super().__init__(parser, key)
+        self.__get_arguments(parser)
 
     def __str__(self):
         return f'''{self.type_name} (
@@ -19,8 +20,8 @@ class RationalBSplineCurveWithKnots(BSplineCurveWithKnots):
         return f'''{super()._str_args()}
     weights      = {self.weights}'''
     
-    def __get_arguments(self, conn):
-        args = get_complex_or_base_arguments(conn,
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_complex_or_base_arguments(
                                              self.key,
                                              ['REPRESENTATION_ITEM',
                                               'GEOMETRIC_REPRESENTATION_ITEM',

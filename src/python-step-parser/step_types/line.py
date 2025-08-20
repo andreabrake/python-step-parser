@@ -2,13 +2,14 @@ from .helpers import get_arguments, clean_display
 from .cartesian_point import CartesianPoint
 from .vector import Vector
 from .curve import Curve
+from ..step_parser import StepParser
 
 class Line(Curve):
     type_name = 'LINE'
 
-    def __init__(self, conn, key: int):
-        super().__init__(conn, key)
-        self.__get_arguments(conn)
+    def __init__(self, parser: StepParser, key: int):
+        super().__init__(parser, key)
+        self.__get_arguments(parser)
 
     def __str__(self):
         return f'''{self.type_name} (
@@ -21,10 +22,10 @@ class Line(Curve):
     point        = {clean_display(self.point)}
     direction    = {clean_display(self.direction)}'''
 
-    def __get_arguments(self, conn):
-        args = get_arguments(conn, self.key)
-        self.point = CartesianPoint(conn, args[1])
-        self.direction = Vector(conn, args[2])
+    def __get_arguments(self, parser: StepParser):
+        args = parser.get_arguments(self.key)
+        self.point = CartesianPoint(parser, args[1])
+        self.direction = Vector(parser, args[2])
         
     def get_geometry(self):
         return super().get_geometry() | {
