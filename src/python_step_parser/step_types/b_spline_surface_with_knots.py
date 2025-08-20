@@ -1,8 +1,8 @@
-from .helpers import get_arguments
-from .b_spline_surface import BSPlineSurface
+from . import b_spline_surface
 from ..step_parser import StepParser
+from ..child_type_register import ChildTypeRegister
 
-class BSplineSurfaceWithKnots(BSPlineSurface):
+class BSplineSurfaceWithKnots(b_spline_surface.BSPlineSurface):
     type_name = 'B_SPLINE_SURFACE_WITH_KNOTS'
 
     def __init__(self, parser: StepParser, key: int):
@@ -32,3 +32,6 @@ class BSplineSurfaceWithKnots(BSPlineSurface):
         self.uknots = args[10]
         self.vknots = args[11]
         self.knot_spec = args[12]
+
+child_type_register = ChildTypeRegister('B_SPLINE_SURFACE_WITH_KNOTS', b_spline_surface.child_type_register)
+child_type_register.register('B_SPLINE_SURFACE_WITH_KNOTS', lambda parser, key: BSplineSurfaceWithKnots(parser, key))

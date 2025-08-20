@@ -1,4 +1,4 @@
-from .helpers import get_complex_or_base_arguments, ChildTypeRegister
+from ..child_type_register import ChildTypeRegister
 from . import curve
 from ..step_parser import StepParser
 

@@ -1,4 +1,4 @@
-from .helpers import get_arguments, clean_display
+from .helpers import clean_display
 from . import placement
 from .direction import Direction
 from ..step_parser import StepParser

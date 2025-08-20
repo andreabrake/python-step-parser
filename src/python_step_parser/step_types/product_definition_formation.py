@@ -1,4 +1,5 @@
-from .helpers import get_arguments, clean_display, ChildTypeRegister
+from .helpers import clean_display
+from ..child_type_register import ChildTypeRegister
 from . import transient
 from . import product
 from ..step_parser import StepParser

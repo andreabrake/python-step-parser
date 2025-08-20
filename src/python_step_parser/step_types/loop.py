@@ -1,8 +1,10 @@
-from .topological_representation_item import TopologicalRepresentationItem
+from . import topological_representation_item
 from ..step_parser import StepParser
+from ..child_type_register import ChildTypeRegister
 
-class Loop(TopologicalRepresentationItem):
-    type_name = 'Loop'
+type_name = 'Loop'
+class Loop(topological_representation_item.TopologicalRepresentationItem):
+    type_name = type_name
 
     def __init__(self, parser: StepParser, key: int):
         super().__init__(parser, key)
@@ -19,3 +21,6 @@ class Loop(TopologicalRepresentationItem):
     
     def __get_arguments(self, parser: StepParser):
         pass
+    
+child_type_register = ChildTypeRegister(type_name, topological_representation_item.child_type_register)
+child_type_register.register(type_name, lambda parser, key: Loop(parser, key))

@@ -1,4 +1,4 @@
-from .helpers import get_arguments, clean_display
+from .helpers import clean_display
 from . import application_context_element
 from ..step_parser import StepParser
 

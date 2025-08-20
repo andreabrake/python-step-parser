@@ -1,4 +1,4 @@
-from .helpers import get_arguments, clean_display, clean_display_list
+from .helpers import clean_display, clean_display_list
 from .product_definition_usage import ProductDefinitionUsage
 from ..step_parser import StepParser
 

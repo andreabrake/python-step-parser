@@ -1,4 +1,4 @@
-from .helpers import get_arguments, clean_display
+from .helpers import clean_display
 from . import shape_definition
 from . import property_definition
 from . import shape_representation

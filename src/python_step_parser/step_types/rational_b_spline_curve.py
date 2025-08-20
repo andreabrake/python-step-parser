@@ -1,4 +1,4 @@
-from .helpers import get_complex_or_base_arguments, clean_display_list
+from .helpers import clean_display_list
 from .b_spline_curve import BSPlineCurve
 from ..step_parser import StepParser
 

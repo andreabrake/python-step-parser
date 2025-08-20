@@ -1,7 +1,7 @@
-from .helpers import get_arguments, clean_display, clean_display_list
+from .helpers import clean_display, clean_display_list
 from .face_bound import FaceBound
-from .abstract_types.surface import parse_surface
 from .transient import Transient, child_type_register
+from .surface import child_type_register as surface_type_register
 from ..step_parser import StepParser
 
 type_name = 'ADVANCED_FACE'
@@ -29,7 +29,7 @@ class AdvancedFace(Transient):
         args = parser.get_arguments(self.key)
         self.name = args[0]
         self.bounds = [FaceBound(parser, b) for b in args[1]]
-        self.geometry = parse_surface(parser, args[2])
+        self.geometry = surface_type_register.parse(parser, args[2])
         self.same_sense = args[3]
 
     def get_geometry(self):

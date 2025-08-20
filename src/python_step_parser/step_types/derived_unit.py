@@ -1,4 +1,4 @@
-from .helpers import get_arguments, clean_display_list
+from .helpers import clean_display_list
 from . import transient
 from . import derived_unit_element
 from .abstract_types import unit_register

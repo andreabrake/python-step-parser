@@ -1,8 +1,9 @@
-from .helpers import get_arguments, clean_display, clean_display_list, ChildTypeRegister
+from .helpers import clean_display, clean_display_list
 from .presentation_style_assignment import PresentationStyleAssignment
 from . import representation_item
 from . import transient
 from ..step_parser import StepParser
+from ..child_type_register import ChildTypeRegister
 
 type_name = 'STYLED_ITEM'
 

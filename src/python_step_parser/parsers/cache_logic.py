@@ -1,7 +1,7 @@
 import sqlite3
 from typing import List, Any, Dict, Tuple, Callable
 from .complex_item_dto import ComplexItemDTO
-from .helpers import parse_arg_value, parse_arg_value_with_traversal_from_cache
+from .helpers import parse_arg_value
 
 def load_entities(cursor: sqlite3.Cursor) -> Dict[int, str]:
     """

@@ -1,8 +1,9 @@
-from .helpers import get_arguments, clean_display
-from .conic import Conic
+from .helpers import clean_display
+from . import conic
 from ..step_parser import StepParser
+from ..child_type_register import ChildTypeRegister
 
-class Circle(Conic):
+class Circle(conic.Conic):
     type_name = 'CIRCLE'
 
     def __init__(self, parser: StepParser, key: int):
@@ -29,3 +30,6 @@ class Circle(Conic):
             'type': self.type_name,
             'radius': self.radius,
         }
+
+child_type_register = ChildTypeRegister('CIRCLE', conic.child_type_register)
+child_type_register.register('CIRCLE', lambda parser, key: Circle(parser, key))

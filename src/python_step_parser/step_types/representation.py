@@ -1,4 +1,5 @@
-from .helpers import get_arguments, clean_display, clean_display_list, ChildTypeRegister
+from .helpers import clean_display, clean_display_list
+from ..child_type_register import ChildTypeRegister
 from . import representation_item
 from . import transient
 from . import representation_context

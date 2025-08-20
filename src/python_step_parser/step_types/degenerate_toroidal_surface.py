@@ -1,8 +1,9 @@
-from .helpers import get_arguments, clean_display
-from .toroidal_surface import ToroidalSurface
+from .helpers import clean_display
+from . import toroidal_surface
 from ..step_parser import StepParser
+from ..child_type_register import ChildTypeRegister
 
-class DegenerateToroidalSurface(ToroidalSurface):
+class DegenerateToroidalSurface(toroidal_surface.ToroidalSurface):
     type_name = 'DEGENERATE_TOROIDAL_SURFACE'
 
     def __init__(self, parser: StepParser, key: int):
@@ -23,3 +24,6 @@ class DegenerateToroidalSurface(ToroidalSurface):
     def __get_arguments(self, parser: StepParser):
         args = parser.get_arguments(self.key)
         self.select_outer = args[4]
+    
+child_type_register = ChildTypeRegister('DEGENERATE_TOROIDAL_SURFACE', toroidal_surface.child_type_register)
+child_type_register.register('DEGENERATE_TOROIDAL_SURFACE', lambda parser, key: DegenerateToroidalSurface(parser, key))

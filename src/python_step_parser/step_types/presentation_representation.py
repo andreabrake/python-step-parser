@@ -1,4 +1,4 @@
-from ..child_type_register import ChildTypeRegister, clean_display_list, clean_display
+from ..child_type_register import ChildTypeRegister
 from . import representation
 from ..step_parser import StepParser
 

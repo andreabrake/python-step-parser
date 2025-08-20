@@ -1,14 +1,17 @@
 import sqlite3
-import itertools
+import os
 from typing import Dict, List, Any
 
 from .parsers.cache_logic import load_entities, load_complex_items, load_list_text, load_args_and_parents
 from .parsers.complex_item_dto import ComplexItemDTO
-from .parsers.helpers import parse_arg_value, get_complex_args
+from .parsers.helpers import parse_arg_value, get_all_complex_args
+from .parsers.parser import parse_and_store_step
 
 class StepParser():
     step_file: str
+    db_file: str
     conn: sqlite3.Connection
+    connected: bool = False
 
     entity_type_cache: Dict[int, str] = {}
     complex_item_cache: Dict[int, List[ComplexItemDTO]] = {}
@@ -18,11 +21,31 @@ class StepParser():
     cache_loaded: bool = False
 
     def __init__(self, step_file: str):
-        self.conn = sqlite3.connect(f'{step_file}.db')
+        self.step_file = step_file
+        self.db_file = f'{self.step_file}.db'
         pass
 
+    def parse(self, override=False, filename=None):
+        if filename is not None:
+            self.db_file = filename
+        if not os.path.isfile(self.step_file):
+            raise Exception('Could not find file {}'.format(self.step_file))
+        if os.path.isfile(self.db_file) and override:
+            os.remove(self.db_file)
+        if not os.path.isfile(self.db_file):
+            parse_and_store_step(f'{self.step_file}', f'{self.step_file}.db')
+
+    def __connect(self):
+        if not self.connected:
+            self.conn = sqlite3.connect(self.db_file)
+            self.connected = True
+
+    def __get_cursor(self):
+        self.__connect()
+        return self.conn.cursor()
+
     def query(self, query_str: str) -> List[List[Any]]:
-        cursor = self.conn.cursor()
+        cursor = self.__get_cursor()
         cursor.execute(query_str)
         results = cursor.fetchall()
         cursor.close()
@@ -32,11 +55,11 @@ class StepParser():
         if entity_id in self.arg_cache:
             return self.arg_cache[entity_id]
         if self.cache_loaded:
-            raise Exception("Fatal cache miss")
+            raise Exception("Fatal arg_cache miss for entity {}".format(entity_id))
         
         print(f'cache miss {entity_id} ({type(entity_id)})')
 
-        cursor = self.conn.cursor()
+        cursor = self.__get_cursor()
         cursor.execute(f"""
                     SELECT id, value_type, value_text
                     FROM step_arguments
@@ -50,13 +73,16 @@ class StepParser():
         self.arg_cache[entity_id] = args
         return args
     
-    def get_complex_items(self, entity_id: int) -> List[ComplexItemDTO]:
+    def get_complex_items(self, entity_id: int, fail=True) -> List[ComplexItemDTO]:
         if entity_id in self.complex_item_cache:
             return self.complex_item_cache[entity_id]
         if self.cache_loaded:
-            raise Exception("Fatal cache miss")
+            if fail:
+                raise Exception("Fatal complex_item_cache miss for entity {}".format(entity_id))
+            else:
+                return []
         
-        cursor = self.conn.cursor()
+        cursor = self.__get_cursor()
         cursor.execute(f"""
                     SELECT entity_id, item_index, type, step_arguments_offset, n_args
                     FROM step_complex_items
@@ -71,19 +97,13 @@ class StepParser():
         self.complex_item_cache[entity_id] = items
         return items
 
-    def get_all_complex_args(args: List[str], types: List[ComplexItemDTO], type_names: List[str]) -> List[str]:
-        return list(itertools.chain.from_iterable([
-            get_complex_args(args, types, t)
-            for t in type_names
-        ]))
-
     def get_complex_or_base_arguments(self, entity_id: int, complex_types: List[str]):
-        args = self.get_arguments(self.conn, entity_id)
-        complex_items = self.get_complex_items(self.conn, entity_id)
+        args = self.get_arguments(entity_id)
+        complex_items = self.get_complex_items(entity_id, False)
         if len(complex_items) > 0:
-            return self.get_all_complex_args(args,
-                                        complex_items,
-                                        complex_types)
+            return get_all_complex_args(args,
+                                             complex_items,
+                                             complex_types)
         return args
 
     def get_list_text(self, argument_id: int, depth:int=0):
@@ -91,9 +111,9 @@ class StepParser():
             return self.list_text_cache[argument_id]
         
         if self.cache_loaded:
-            raise Exception("Fatal cache miss")
+            raise Exception("Fatal list_text_cache miss for argument {}".format(argument_id))
         
-        cursor = self.conn.cursor()
+        cursor = self.__get_cursor()
         cursor.execute(f"""
                     SELECT value_type, value_text
                     FROM step_list_items
@@ -123,14 +143,14 @@ class StepParser():
         if self.cache_loaded:
             raise Exception("Fatal cache miss")
         
-        cursor = self.conn.cursor()
+        cursor = self.__get_cursor()
         cursor.execute(f"SELECT type FROM step_entities WHERE Id = '{id}';")
         val = [str(row[0]).upper() for row in cursor.fetchall()][0]
         self.entity_type_cache[id] = val
         return val
 
     def get_representation_contexts(self) -> List[int]:
-        cursor = self.conn.cursor()
+        cursor = self.__get_cursor()
 
         cursor.execute(f"""
                     SELECT id
@@ -158,7 +178,7 @@ class StepParser():
     def load_cache(self) -> None:
         print('[*] Loading data cache')
 
-        cursor = self.conn.cursor()
+        cursor = self.__get_cursor()
 
         # Load entities
         self.entity_type_cache = load_entities(cursor)

@@ -1,4 +1,4 @@
-from .helpers import get_complex_or_base_arguments, clean_display, clean_display_list
+from .helpers import clean_display, clean_display_list
 from .cartesian_point import CartesianPoint
 from .b_spline_curve_with_knots import BSplineCurveWithKnots
 from ..step_parser import StepParser

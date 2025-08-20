@@ -1,4 +1,5 @@
-from .helpers import get_complex_or_base_arguments, clean_display_list, ChildTypeRegister
+from .helpers import clean_display_list
+from ..child_type_register import ChildTypeRegister
 from . import bounded_curve
 from .cartesian_point import CartesianPoint
 from ..step_parser import StepParser

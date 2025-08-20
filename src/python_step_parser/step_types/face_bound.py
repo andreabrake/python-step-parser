@@ -1,7 +1,7 @@
-from .helpers import get_arguments, clean_display
-from .abstract_types import loop
+from .helpers import clean_display
 from .topological_representation_item import TopologicalRepresentationItem
 from ..step_parser import StepParser
+from . import loop
 
 class FaceBound(TopologicalRepresentationItem):
     type_name = 'FACE_BOUND'
@@ -23,7 +23,7 @@ class FaceBound(TopologicalRepresentationItem):
     
     def __get_arguments(self, parser: StepParser):
         args = parser.get_arguments(self.key)
-        self.bound = loop.parse(parser, args[1])
+        self.bound = loop.child_type_register.parse(parser, args[1])
         self.orientation = args[2]
     
     def get_geometry(self):

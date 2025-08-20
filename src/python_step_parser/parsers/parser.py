@@ -6,7 +6,6 @@ from .db_helpers import init_db, save_entities_to_db
 
 # --- STEP Parsing Functions ---
 
-
 def parse_step_file(filepath: str) -> Dict[int, Dict]:
     """Parses STEP and returns entities."""
     with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:

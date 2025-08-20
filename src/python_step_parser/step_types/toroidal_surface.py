@@ -1,8 +1,9 @@
-from .helpers import get_arguments, clean_display
-from .elementary_surface import ElementarySurface
+from .helpers import clean_display
+from . import elementary_surface
 from ..step_parser import StepParser
+from ..child_type_register import ChildTypeRegister
 
-class ToroidalSurface(ElementarySurface):
+class ToroidalSurface(elementary_surface.ElementarySurface):
     type_name = 'TOROIDAL_SURFACE'
 
     def __init__(self, parser: StepParser, key: int):
@@ -24,3 +25,6 @@ class ToroidalSurface(ElementarySurface):
         args = parser.get_arguments(self.key)
         self.major_radius = args[2]
         self.minor_radius = args[3]
+
+child_type_register = ChildTypeRegister('TOROIDAL_SURFACE', elementary_surface.child_type_register)
+child_type_register.register('TOROIDAL_SURFACE', lambda parser, key: ToroidalSurface(parser, key))

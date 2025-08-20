@@ -1,4 +1,5 @@
-from .helpers import get_arguments, clean_display, ChildTypeRegister
+from .helpers import clean_display
+from ..child_type_register import ChildTypeRegister
 from .closed_shell import ClosedShell
 from . import solid_model
 from ..step_parser import StepParser

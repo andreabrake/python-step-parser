@@ -1,5 +1,6 @@
-from .helpers import get_arguments
+
 from ..step_parser import StepParser
+from .abstract_types import color_register
 
 class ColourRGB():
     def __init__(self, parser: StepParser, key: int):
@@ -21,3 +22,5 @@ class ColourRGB():
         self.r = args[1]
         self.g = args[2]
         self.b = args[3]
+
+color_register.register('COLOUR_RGB', lambda parser, key: ColourRGB(parser, key))

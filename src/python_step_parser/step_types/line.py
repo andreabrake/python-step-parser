@@ -1,10 +1,10 @@
-from .helpers import get_arguments, clean_display
+from .helpers import clean_display
 from .cartesian_point import CartesianPoint
 from .vector import Vector
-from .curve import Curve
+from . import curve
 from ..step_parser import StepParser
 
-class Line(Curve):
+class Line(curve.Curve):
     type_name = 'LINE'
 
     def __init__(self, parser: StepParser, key: int):
@@ -33,3 +33,5 @@ class Line(Curve):
             'point': self.point.get_geometry(),
             'dir': self.direction.get_geometry(),
         }
+
+curve.child_type_register.register('LINE', lambda parser, key: Line(parser, key))

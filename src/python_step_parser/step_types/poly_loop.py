@@ -1,10 +1,11 @@
-from .helpers import get_arguments, clean_display_list
+from .helpers import clean_display_list
 from .cartesian_point import CartesianPoint
-from .loop import Loop
+from . import loop
 from ..step_parser import StepParser
 
-class PolyLoop(Loop):
-    type_name = 'POLY_LOOP'
+type_name = 'POLY_LOOP'
+class PolyLoop(loop.Loop):
+    type_name = type_name
 
     def __init__(self, parser: StepParser, key: int):
         super().__init__(parser, key)
@@ -23,3 +24,5 @@ class PolyLoop(Loop):
     def __get_arguments(self, parser: StepParser):
         args = parser.get_arguments(self.key)
         self.polygon = [CartesianPoint(parser, p) for p in args[1]]
+        
+loop.child_type_register.register(type_name, lambda parser, key: PolyLoop(parser, key))

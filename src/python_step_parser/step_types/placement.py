@@ -1,4 +1,5 @@
-from .helpers import get_arguments, clean_display, ChildTypeRegister
+from .helpers import clean_display
+from ..child_type_register import ChildTypeRegister
 from .cartesian_point import CartesianPoint
 from . import geometric_representation_item
 from ..step_parser import StepParser

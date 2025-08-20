@@ -1,8 +1,9 @@
-from .helpers import get_arguments, clean_display
-from .elementary_surface import ElementarySurface
+from .helpers import clean_display
+from . import elementary_surface
 from ..step_parser import StepParser
+from ..child_type_register import ChildTypeRegister
 
-class CylindricalSurface(ElementarySurface):
+class CylindricalSurface(elementary_surface.ElementarySurface):
     type_name = 'CYLINDRICAL_SURFACE'
 
     def __init__(self, parser: StepParser, key: int):
@@ -28,3 +29,6 @@ class CylindricalSurface(ElementarySurface):
             'type': 'CYLINDRICAL',
             'radius': self.radius
         }
+    
+child_type_register = ChildTypeRegister('CYLINDRICAL_SURFACE', elementary_surface.child_type_register)
+child_type_register.register('CYLINDRICAL_SURFACE', lambda parser, key: CylindricalSurface(parser, key))

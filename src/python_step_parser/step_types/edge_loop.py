@@ -1,10 +1,11 @@
-from .helpers import get_arguments, clean_display_list
+from .helpers import clean_display_list
 from .oriented_edge import OrientedEdge
-from .loop import Loop
+from . import loop
 from ..step_parser import StepParser
 
-class EdgeLoop(Loop):
-    type_name = 'EDGE_LOOP'
+type_name = 'EDGE_LOOP'
+class EdgeLoop(loop.Loop):
+    type_name = type_name
 
     def __init__(self, parser: StepParser, key: int):
         super().__init__(parser, key)
@@ -30,3 +31,5 @@ class EdgeLoop(Loop):
             'type': self.type_name,
             'edges': [e.get_geometry() for e in self.edge_list]
         }
+    
+loop.child_type_register.register(type_name, lambda parser, key: EdgeLoop(parser, key))

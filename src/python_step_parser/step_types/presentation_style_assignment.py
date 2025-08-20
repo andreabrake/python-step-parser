@@ -1,4 +1,4 @@
-from .helpers import get_arguments, clean_display_list
+from .helpers import clean_display_list
 from .surface_style_usage import SurfaceStyleUsage
 from ..step_parser import StepParser
 

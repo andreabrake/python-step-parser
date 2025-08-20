@@ -1,8 +1,9 @@
-from .helpers import get_arguments, clean_display
-from .axis2_placement3d import Axis2Placement3d
+from .helpers import clean_display
+from . import elementary_surface
 from ..step_parser import StepParser
+from ..child_type_register import ChildTypeRegister
 
-class SphericalSurface():
+class SphericalSurface(elementary_surface.ElementarySurface):
     type_name = 'SPHERICAL_SURFACE'
 
     def __init__(self, parser: StepParser, key: int):
@@ -22,3 +23,6 @@ class SphericalSurface():
     def __get_arguments(self, parser: StepParser):
         args = parser.get_arguments(self.key)
         self.radius = args[2]
+
+child_type_register = ChildTypeRegister('SPHERICAL_SURFACE', elementary_surface.child_type_register)
+child_type_register.register('SPHERICAL_SURFACE', lambda parser, key: SphericalSurface(parser, key))

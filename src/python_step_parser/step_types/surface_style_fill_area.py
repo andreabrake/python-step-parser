@@ -1,5 +1,6 @@
-from .helpers import get_arguments, clean_display
+from .helpers import clean_display
 from .fill_area_style import FillAreaStyle
+from .abstract_types import surface_style_register
 from ..step_parser import StepParser
 
 class SurfaceStyleFillArea():
@@ -18,3 +19,5 @@ class SurfaceStyleFillArea():
     def __get_arguments(self, parser: StepParser):
         args = parser.get_arguments(self.key)
         self.fill_area = FillAreaStyle(parser, args[0])
+
+surface_style_register.register('SURFACE_STYLE_FILL_AREA', lambda parser, key: SurfaceStyleFillArea(parser, key))

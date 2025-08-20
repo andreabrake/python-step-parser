@@ -1,5 +1,6 @@
 from typing import List, Union, Tuple, Dict, Any
 import re
+import itertools
 from .complex_item_dto import ComplexItemDTO
 
 def split_arguments(arg_string: str) -> List[str]:
@@ -61,3 +62,9 @@ def get_complex_args(args: List[str], types: List[ComplexItemDTO], type_name: st
     if ci is None:
         return []
     return args[ci.arg_offset:(ci.arg_offset + ci.n_args)]
+
+def get_all_complex_args(args: List[str], types: List[ComplexItemDTO], type_names: List[str]) -> List[str]:
+    return list(itertools.chain.from_iterable([
+        get_complex_args(args, types, t)
+        for t in type_names
+    ]))

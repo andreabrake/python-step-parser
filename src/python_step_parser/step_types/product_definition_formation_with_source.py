@@ -1,4 +1,4 @@
-from .helpers import get_arguments, ChildTypeRegister
+from ..child_type_register import ChildTypeRegister
 from . import product_definition_formation
 from ..step_parser import StepParser
 

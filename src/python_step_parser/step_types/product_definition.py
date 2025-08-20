@@ -1,4 +1,5 @@
-from .helpers import get_arguments, clean_display, ChildTypeRegister
+from .helpers import clean_display
+from ..child_type_register import ChildTypeRegister
 from . import transient
 from . import abstract_types
 from . import product_definition_formation

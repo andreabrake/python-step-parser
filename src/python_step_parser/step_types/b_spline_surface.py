@@ -1,9 +1,10 @@
-from .helpers import get_arguments, clean_display_doublelist
-from .bounded_surface import BoundedSurface
+from .helpers import clean_display_doublelist
+from . import bounded_surface
 from .cartesian_point import CartesianPoint
 from ..step_parser import StepParser
+from ..child_type_register import ChildTypeRegister
 
-class BSPlineSurface(BoundedSurface):
+class BSPlineSurface(bounded_surface.BoundedSurface):
     type_name = 'B_SPLINE_SURFACE'
 
     def __init__(self, parser: StepParser, key: int):
@@ -36,3 +37,6 @@ class BSPlineSurface(BoundedSurface):
         self.uclosed = args[5]
         self.vclosed = args[6]
         self.self_intersect = args[7]
+
+child_type_register = ChildTypeRegister('B_SPLINE_SURFACE', bounded_surface.child_type_register)
+child_type_register.register('B_SPLINE_SURFACE', lambda parser, key: BSPlineSurface(parser, key))

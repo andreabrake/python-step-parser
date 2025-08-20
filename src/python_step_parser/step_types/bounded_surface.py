@@ -1,8 +1,9 @@
-from .helpers import get_arguments, clean_display
-from .surface import Surface
+from .helpers import clean_display
+from . import surface
 from ..step_parser import StepParser
+from ..child_type_register import ChildTypeRegister
 
-class BoundedSurface(Surface):
+class BoundedSurface(surface.Surface):
     type_name = 'BOUNDED_SURFACE'
 
     def __init__(self, parser: StepParser, key: int):
@@ -25,3 +26,6 @@ class BoundedSurface(Surface):
         return {
             'type': 'BOUNDED'
         }
+
+child_type_register = ChildTypeRegister('BOUNDED_SURFACE', surface.child_type_register)
+child_type_register.register('BOUNDED_SURFACE', lambda parser, key: BoundedSurface(parser, key))

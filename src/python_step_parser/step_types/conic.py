@@ -1,9 +1,10 @@
-from .helpers import get_arguments, clean_display
+from .helpers import clean_display
 from .axis2_placement3d import Axis2Placement3d
-from .curve import Curve
+from . import curve
 from ..step_parser import StepParser
+from ..child_type_register import ChildTypeRegister
 
-class Conic(Curve):
+class Conic(curve.Curve):
     type_name = 'CONIC'
 
     def __init__(self, parser: StepParser, key: int):
@@ -24,3 +25,6 @@ class Conic(Curve):
     def __get_arguments(self, parser: StepParser):
         args = parser.get_arguments(self.key)
         self.position = Axis2Placement3d(parser, args[1])
+
+child_type_register = ChildTypeRegister('CONIC', curve.child_type_register)
+child_type_register.register('CONIC', lambda parser, key: Conic(parser, key))

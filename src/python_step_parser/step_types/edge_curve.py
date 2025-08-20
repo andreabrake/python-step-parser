@@ -1,7 +1,7 @@
-from .helpers import  get_arguments, clean_display
+from .helpers import clean_display
 from .vertex_point import VertexPoint
 from .edge import Edge
-from .abstract_types.curve import parse_curve
+from .curve import child_type_register as curve_type_register
 from ..step_parser import StepParser
 
 class EdgeCurve(Edge):
@@ -28,7 +28,7 @@ class EdgeCurve(Edge):
         args = parser.get_arguments(self.key)
         self.start = VertexPoint(parser, args[1])
         self.end = VertexPoint(parser, args[2])
-        self.geometry = parse_curve(parser, args[3])
+        self.geometry = curve_type_register.parse(parser, args[3])
         self.same_sense = args[4]
 
     def get_geometry(self):

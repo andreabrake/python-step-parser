@@ -1,6 +1,6 @@
-from .helpers import get_arguments, clean_display_list
+from .helpers import clean_display_list
 from .surface_style_fill_area import SurfaceStyleFillArea
-from .abstract_types import surface_style
+from .abstract_types import surface_style_register
 from ..step_parser import StepParser
 
 class SurfaceSideStyle():
@@ -20,4 +20,4 @@ class SurfaceSideStyle():
     def __get_arguments(self, parser: StepParser):
         args = parser.get_arguments(self.key)
         self.side = args[0]
-        self.styles = [surface_style.parse(parser, e) for e in args[1]]
+        self.styles = [surface_style_register.parse(parser, e) for e in args[1]]

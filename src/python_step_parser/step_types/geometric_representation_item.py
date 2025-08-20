@@ -1,4 +1,4 @@
-from .helpers import get_complex_or_base_arguments, ChildTypeRegister
+from ..child_type_register import ChildTypeRegister
 from . import representation_item
 from ..step_parser import StepParser
 
@@ -22,7 +22,6 @@ class GeometricRepresentationItem(representation_item.RepresentationItem):
     
     def __get_arguments(self, parser: StepParser):
         pass
-
 
 child_type_register = ChildTypeRegister(type_name, representation_item.child_type_register)
 child_type_register.register(type_name, lambda parser, key: GeometricRepresentationItem(parser, key))

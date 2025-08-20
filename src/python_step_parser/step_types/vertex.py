@@ -1,4 +1,4 @@
-from .helpers import get_arguments, clean_display
+from .helpers import clean_display
 from .cartesian_point import CartesianPoint
 from .topological_representation_item import TopologicalRepresentationItem
 from ..step_parser import StepParser

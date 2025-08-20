@@ -1,9 +1,10 @@
-from .helpers import get_arguments, clean_display
+from .helpers import clean_display
 from .axis2_placement3d import Axis2Placement3d
-from .surface import Surface
+from . import surface
 from ..step_parser import StepParser
+from ..child_type_register import ChildTypeRegister
 
-class ElementarySurface(Surface):
+class ElementarySurface(surface.Surface):
     type_name = 'ELEMENTARY_SURFACE'
 
     def __init__(self, parser: StepParser, key: int):
@@ -29,3 +30,6 @@ class ElementarySurface(Surface):
             'type': 'ELEMENTARY',
             'position': self.position.get_geometry()
         }
+    
+child_type_register = ChildTypeRegister('ELEMENTARY_SURFACE', surface.child_type_register)
+child_type_register.register('ELEMENTARY_SURFACE', lambda parser, key: ElementarySurface(parser, key))
