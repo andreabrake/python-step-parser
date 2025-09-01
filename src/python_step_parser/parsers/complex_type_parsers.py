@@ -72,9 +72,8 @@ def parse_complex_type(complex_type_args: str):
     entities = split_complex_type_entities(complex_type_args)
     complex_types = []
     full_args = []
-    print(complex_type_args)
     for e in entities:
-        m = re.match(r"(\w*)\((.*)\)", e)
+        m = re.match(r"(\w*)\s*\((.*)\)", e)
         if m:
             entity_type = m.group(1)
             raw_args = m.group(2)

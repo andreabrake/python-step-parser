@@ -39,11 +39,12 @@ def parse_step_file(filepath: str) -> Dict[int, Dict]:
         line = line.strip().rstrip(';')
         if not line.startswith('#'):
             continue
-        m = re.match(r"#(\d+)\s*=\s*(\w*)\((.*)\)", line)
+        m = re.match(r"#(\d+)\s*=\s*(\w*)\s*\((.*)\)", line)
         if m:
             entity_id = int(m.group(1))
             entity_type = m.group(2)
             raw_args = m.group(3)
+            
             if entity_type.strip() == '':
                 entity_type = 'COMPLEX'
                 complex_items, args = parse_complex_type(raw_args)
