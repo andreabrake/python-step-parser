@@ -22,7 +22,7 @@ class ProductDefinitionContext(application_context_element.ApplicationContextEle
         
         self.life_cycle_stage = args[2]
 
-application_context_element.register(
+application_context_element.child_type_register.register(
     'PRODUCT_DEFINITION_CONTEXT',
     lambda parser, key: ProductDefinitionContext(parser, key)
 )

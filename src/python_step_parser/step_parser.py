@@ -149,6 +149,29 @@ class StepParser():
         self.entity_type_cache[id] = val
         return val
 
+    def get_products(self) -> List[int]:
+        cursor = self.__get_cursor()
+
+        cursor.execute(f"""
+                    SELECT id
+                    FROM step_entities
+                    WHERE type IN ('PRODUCT')
+                    ORDER BY id""")
+        
+        simple_entities = [int(row[0]) for row in cursor.fetchall()]
+        
+        cursor.execute(f"""
+                    SELECT distinct entity_id
+                    FROM step_complex_items
+                    WHERE type = 'PRODUCT'
+                    ORDER BY entity_id""")
+        
+        complex_entities = [int(row[0]) for row in cursor.fetchall()]
+        
+        cursor.close()
+        
+        return simple_entities + complex_entities
+
     def get_representation_contexts(self) -> List[int]:
         cursor = self.__get_cursor()
 
