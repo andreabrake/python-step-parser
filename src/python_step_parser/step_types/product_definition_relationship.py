@@ -1,14 +1,17 @@
-from .helpers import clean_display, clean_display_list
-from .transient import Transient
+from . import transient
+from .abstract_types import characterized_definition_register
 from ..step_parser import StepParser
+from ..child_type_register import ChildTypeRegister
 
-class ProductDefinitionRelationship(Transient):
+type_name = 'PRODUDCT_DEFINITION_RELATIONSHIP'
+class ProductDefinitionRelationship(transient.Transient):
+    type_name = type_name
     def __init__(self, parser: StepParser, key: int):
         super().__init__(parser, key)
         self.__get_arguments(parser)
 
     def __str__(self):
-        return f'''PRODUDCT_DEFINITION_RELATIONSHIP (
+        return f'''{type_name} (
 {self._str_args()}
 )
 '''
@@ -29,3 +32,10 @@ class ProductDefinitionRelationship(Transient):
         self.description = args[2]
         self.relating_product_definition = args[3]
         self.related_product_definition = args[4]
+
+
+child_type_register = ChildTypeRegister(type_name, [
+    transient.child_type_register,
+    characterized_definition_register
+])
+child_type_register.register(type_name, lambda parser, key: ProductDefinitionRelationship(parser, key))

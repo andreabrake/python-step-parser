@@ -1,5 +1,6 @@
 from ..child_type_register import ChildTypeRegister
 from . import representation
+from .abstract_types import representation_register
 from ..step_parser import StepParser
 
 type_name = 'SHAPE_REPRESENTATION'
@@ -23,5 +24,8 @@ class ShapeRepresentation(representation.Representation):
         # No special args
         pass
 
-child_type_register = ChildTypeRegister(type_name, representation.child_type_register)
+child_type_register = ChildTypeRegister(type_name, [
+    representation.child_type_register,
+    representation_register
+])
 child_type_register.register(type_name, lambda parser, key: ShapeRepresentation(parser, key))

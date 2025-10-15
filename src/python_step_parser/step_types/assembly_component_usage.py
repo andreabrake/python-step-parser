@@ -1,14 +1,17 @@
 from .helpers import clean_display, clean_display_list
-from .product_definition_usage import ProductDefinitionUsage
+from . import product_definition_usage
 from ..step_parser import StepParser
+from ..child_type_register import ChildTypeRegister
 
-class AssemblyComponentUsage(ProductDefinitionUsage):
+type_name = 'ASSEMBLY_COMPONENT_USAGE'
+class AssemblyComponentUsage(product_definition_usage.ProductDefinitionUsage):
+    type_name = type_name
     def __init__(self, parser: StepParser, key: int):
         super().__init__(parser, key)
         self.__get_arguments(parser)
 
     def __str__(self):
-        return f'''ASSEMBLY_COMPONENT_USAGE (
+        return f'''{type_name} (
 {self._str_args()}
 )
 '''
@@ -21,3 +24,6 @@ class AssemblyComponentUsage(ProductDefinitionUsage):
         args = parser.get_arguments(self.key)
         
         self.reference_designator = args[5]
+
+child_type_register = ChildTypeRegister(type_name, product_definition_usage.child_type_register)
+child_type_register.register(type_name, lambda parser, key: AssemblyComponentUsage(parser, key))

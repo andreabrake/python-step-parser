@@ -30,10 +30,11 @@ class Representation(transient.Transient):
         self.name = args[0]
         if self.resolve_children:
             self.items = [representation_item.child_type_register.parse(parser, a) for a in args[1]]
+            self.context = representation_context.child_type_register.parse(parser, args[2])
         else:
             self.items = args[1]
+            self.context = args[2]
         
-        self.context = representation_context.child_type_register.parse(parser, args[2])
 
 child_type_register = ChildTypeRegister(type_name, transient.child_type_register)
 child_type_register.register(type_name, lambda parser, key: Representation(parser, key))

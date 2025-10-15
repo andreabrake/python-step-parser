@@ -1,14 +1,17 @@
 from .helpers import clean_display, clean_display_list
-from .product_definition_relationship import ProductDefinitionRelationship
+from . import product_definition_relationship
 from ..step_parser import StepParser
+from ..child_type_register import ChildTypeRegister
 
-class ProductDefinitionUsage(ProductDefinitionRelationship):
+type_name = 'PRODUCT_DEFINITION_USAGE'
+class ProductDefinitionUsage(product_definition_relationship.ProductDefinitionRelationship):
+    type_name = type_name
     def __init__(self, parser: StepParser, key: int):
         super().__init__(parser, key)
         self.__get_arguments(parser)
 
     def __str__(self):
-        return f'''PRODUCT_DEFINITION_USAGE (
+        return f'''{type_name} (
 {self._str_args()}
 )
 '''
@@ -20,3 +23,6 @@ class ProductDefinitionUsage(ProductDefinitionRelationship):
         args = parser.get_arguments(self.key)
         
         # No additional args
+
+child_type_register = ChildTypeRegister(type_name, product_definition_relationship.child_type_register)
+child_type_register.register(type_name, lambda parser, key: ProductDefinitionUsage(parser, key))

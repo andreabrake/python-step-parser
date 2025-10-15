@@ -2,6 +2,7 @@ from .helpers import clean_display, clean_display_list
 from . import representation_item
 from .transient import Transient
 from .item_defined_transformation import ItemDefinedTransformation
+from .abstract_types import representation_register
 from ..step_parser import StepParser
 
 class ShapeRepresentationRelationship(Transient):
@@ -31,11 +32,11 @@ class ShapeRepresentationRelationship(Transient):
                                              ['REPRESENTATION_RELATIONSHIP',
                                               'REPRESENTATION_RELATIONSHIP_WITH_TRANSFORMATION',
                                               'SHAPE_REPRESENTATION_RELATIONSHIP'])
-        
+
         self.name = args[0]
         self.description = args[1]
-        self.shape_representation_1 = representation_item.child_type_register.parse(parser, args[2])
-        self.shape_representation_2 = representation_item.child_type_register.parse(parser, args[3])
+        self.shape_representation_1 = representation_register.parse(parser, args[2])
+        self.shape_representation_2 = representation_register.parse(parser, args[3])
         if len(args) > 4:
             self.transformation = ItemDefinedTransformation(parser, args[4])
         else:

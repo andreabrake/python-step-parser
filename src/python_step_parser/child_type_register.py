@@ -1,4 +1,4 @@
-from typing import Dict, Callable, Any
+from typing import Dict, Callable, Any, List, Callable
 from .step_parser import StepParser
 
 class ChildTypeRegister():
@@ -6,6 +6,7 @@ class ChildTypeRegister():
         self.name = name
         self.base_registers = base_registers
         self.child_type_register: Dict[str, Callable[[StepParser, int], Any]] = {}
+        self.register_callbacks: List[Callable[[str, Callable[[StepParser, int], Any]], None]] = []
 
     def try_parse(self, parser: StepParser, id: int):
         type = parser.get_entity_type(id)
@@ -43,3 +44,9 @@ class ChildTypeRegister():
                     r.register(type_name, type_val)
             else:
                 self.base_registers.register(type_name, type_val)
+        
+        for cb in self.register_callbacks:
+            cb(type_name, type_val)
+    
+    def on_register(self, callback: Callable[[str, any], None]):
+        self.register_callbacks.append(callback)

@@ -198,6 +198,12 @@ class StepParser():
     def get_parents(self, id: int) -> List[int]:
         return [] if id not in self.parent_ref_cache else self.parent_ref_cache[id]
 
+    def get_parents_of_type(self, id: int, type: str) -> List[int]:
+        return [] if id not in self.parent_ref_cache else [
+            k for k in self.parent_ref_cache[id]
+            if k in self.entity_type_cache and self.entity_type_cache[k] == type
+        ]
+    
     def load_cache(self) -> None:
         print('[*] Loading data cache')
 
